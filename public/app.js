@@ -18,6 +18,8 @@ angular.module("spotify", [])
     $scope.playlistsSongs = {};
     $scope.songsNotInPlaylist = {};
     $scope.a = {};
+    $scope.artistSongs = {};
+    $scope.albumSongs = {};
     var a;
     
     $http.get('/getPlaylist')
@@ -75,6 +77,33 @@ angular.module("spotify", [])
             .success(function(data) {
              
                  $scope.songsNotInPlaylist = data;
+            })
+            
+            .error(function(error) {
+                console.log('Error: ' + error);
+            });
+    
+    }
+
+    $scope.getArtistSongs = function(artist) {
+    
+            $http.get('/artistSongs/'+artist.artist_number)
+            .success(function(data) {
+             
+                 $scope.artistSongs = data;
+            })
+            
+            .error(function(error) {
+                console.log('Error: ' + error);
+            });
+    
+    }
+    $scope.getAlbumSongs = function(album) {
+    
+            $http.get('/albumSongs/'+album.album_number)
+            .success(function(data) {
+             
+                 $scope.albumSongs = data;
             })
             
             .error(function(error) {

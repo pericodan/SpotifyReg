@@ -10,7 +10,7 @@ client.connect();
 
 
 exports.findAllSongs = function (req, res, next) {
-	var results = [];
+    var results = [];
 
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
@@ -41,7 +41,7 @@ exports.findAllSongs = function (req, res, next) {
 };
 
 exports.searchSong = function (req, res, next) {
-	var results = [];
+    var results = [];
 
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
@@ -71,7 +71,7 @@ exports.searchSong = function (req, res, next) {
     });
 };
 exports.searchArtist = function (req, res, next) {
-	var results = [];
+    var results = [];
 
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
@@ -101,8 +101,36 @@ exports.searchArtist = function (req, res, next) {
     });
 };
 
+exports.getArtistSongs = function (req, res, next) {
+    var results = [];
+
+    // Get a Postgres client from the connection pool
+    pg.connect(connectionString, function(err, client, done) {
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+
+        var query = client.query("select * from song, artist, album, includes where artist.artist_number=includes.artist_number and album.album_number=includes.album_number and song.song_number=includes.song_number and artist.artist_number="+req.params.number+";");
+
+        query.on('row', function(row) {
+            results.push(row);
+        });
+        
+        
+
+        // After all data is returned, close connection and return results
+        query.on('end', function() {
+            done();
+            return res.json(results);
+        });
+
+    });
+};
+
 exports.findAllArtists = function (req, res, next) {
-	var results = [];
+    var results = [];
 
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
@@ -133,7 +161,7 @@ exports.findAllArtists = function (req, res, next) {
 };
 
 exports.findAllAlbums = function (req, res, next) {
-	var results = [];
+    var results = [];
 
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
@@ -163,10 +191,41 @@ exports.findAllAlbums = function (req, res, next) {
     });
 };
 
+exports.getAlbumSongs = function (req, res, next) {
+    var results = [];
+
+    // Get a Postgres client from the connection pool
+    pg.connect(connectionString, function(err, client, done) {
+        // Handle connection errors
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+
+        // SQL Query > Select Data
+        var query = client.query("select * from song, artist, album, includes where artist.artist_number=includes.artist_number and album.album_number=includes.album_number and song.song_number=includes.song_number and album.album_number="+req.params.number+";");
+
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            results.push(row);
+        });
+        
+        
+
+        // After all data is returned, close connection and return results
+        query.on('end', function() {
+            done();
+            return res.json(results);
+        });
+
+    });
+};
+
 exports.getUser = function (req, res, next) {
-	var results = [];
-	
-	var data = {username: req.params.username, password: req.params.password};
+    var results = [];
+    
+    var data = {username: req.params.username, password: req.params.password};
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
         // Handle connection errors
@@ -183,7 +242,7 @@ exports.getUser = function (req, res, next) {
 
         // Stream results back one row at a time
         query.on('row', function(row) {
-        	
+            
             results.push(row);
         });
         
@@ -199,9 +258,9 @@ exports.getUser = function (req, res, next) {
 };
 
 exports.getUser2 = function (req, res, next) {
-	var results = [];
-	
-	var data = {username: req.params.username, password: req.params.password};
+    var results = [];
+    
+    var data = {username: req.params.username, password: req.params.password};
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
         // Handle connection errors
@@ -218,7 +277,7 @@ exports.getUser2 = function (req, res, next) {
 
         // Stream results back one row at a time
         query.on('row', function(row) {
-        	
+            
             results.push(row);
         });
         
@@ -234,9 +293,9 @@ exports.getUser2 = function (req, res, next) {
 };
 
 exports.getAdmin = function (req, res, next) {
-	var results = [];
-	
-	
+    var results = [];
+    
+    
     pg.connect(connectionString, function(err, client, done) {
         // Handle connection errors
         if(err) {
@@ -252,7 +311,7 @@ exports.getAdmin = function (req, res, next) {
 
         // Stream results back one row at a time
         query.on('row', function(row) {
-        	
+            
             results.push(row);
         });
         
@@ -267,9 +326,9 @@ exports.getAdmin = function (req, res, next) {
     });
 };
 exports.addPending = function (req, res, next) {
-	var results = [];
-	
-	
+    var results = [];
+    
+    
     pg.connect(connectionString, function(err, client, done) {
         // Handle connection errors
         if(err) {
@@ -291,9 +350,9 @@ exports.addPending = function (req, res, next) {
 };
 
 exports.addPlaylist = function (req, res, next) {
-	var results = [];
-	var a = req.params.genre.split(",");
-	
+    var results = [];
+    var a = req.params.genre.split(",");
+    
     pg.connect(connectionString, function(err, client, done) {
         // Handle connection errors
         if(err) {
@@ -311,11 +370,11 @@ exports.addPlaylist = function (req, res, next) {
         });
         
         for(i=0; i<a.length; i++){
-       	 var query = client.query("insert into playlist_genre(playlist_number, playlist_genre) values((select playlist_number from playlist order by playlist_number desc limit 1), '"+a[i]+"');");
-       	 query.on('end', function() {
+         var query = client.query("insert into playlist_genre(playlist_number, playlist_genre) values((select playlist_number from playlist order by playlist_number desc limit 1), '"+a[i]+"');");
+         query.on('end', function() {
             done();
          });
-       	 
+         
         }
         
         return res.json(results);
@@ -324,11 +383,11 @@ exports.addPlaylist = function (req, res, next) {
 };
 
 exports.addSong = function (req, res, next) {
-	var results = [];
-	var results1 = [];
-	var results2 = [];
-	var a = req.params.genre.split(",");
-	//console.log(a[0]);
+    var results = [];
+    var results1 = [];
+    var results2 = [];
+    var a = req.params.genre.split(",");
+    //console.log(a[0]);
 
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
@@ -340,12 +399,12 @@ exports.addSong = function (req, res, next) {
         }
 
         // SQL Query > Select Data
-       	var query = client.query("insert into song(song_title) values('"+req.params.title+"');");
-       	query.on('end', function() {
+        var query = client.query("insert into song(song_title) values('"+req.params.title+"');");
+        query.on('end', function() {
             done();
         });
-	
-	var query = client.query("select * from artist where lower(artist_name)=lower('"+req.params.artist+"');");
+    
+    var query = client.query("select * from artist where lower(artist_name)=lower('"+req.params.artist+"');");
 
         // Stream results back one row at a time
         query.on('row', function(row) {
@@ -369,10 +428,10 @@ exports.addSong = function (req, res, next) {
         
         var i=0;
         for(i=0; i<a.length; i++){
-        	var query = client.query("insert into song_genre(song_number, genre) values ((select song_number from song where song_title='"+req.params.title+"' order by song_number desc limit 1), '"+a[i]+"' );");
-        	query.on('end', function() {
-            	done();
-        	});
+            var query = client.query("insert into song_genre(song_number, genre) values ((select song_number from song where song_title='"+req.params.title+"' order by song_number desc limit 1), '"+a[i]+"' );");
+            query.on('end', function() {
+                done();
+            });
         }
         
         
@@ -384,7 +443,7 @@ exports.addSong = function (req, res, next) {
         });
         
         query.on('end', function() {
-            	done();
+                done();
                 if (results2.length==0){
                 var query = client.query("insert into album(album_title) values('"+req.params.album+"');");
                 query.on('end', function() {
@@ -395,9 +454,9 @@ exports.addSong = function (req, res, next) {
                     return res.json(results);
                 }
                 
-        });	
+        }); 
             
-            	
+                
         
        
 
@@ -443,7 +502,7 @@ exports.addSongToIncludes = function (req, res, next) {
 };
 
 exports.getPlaylist = function (req, res, next) {
-	var results = [];
+    var results = [];
 
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
@@ -473,8 +532,8 @@ exports.getPlaylist = function (req, res, next) {
     });
 };
 exports.getPlaylistSongs = function (req, res, next) {
-	var results = [];
-	var temp = []
+    var results = [];
+    var temp = []
 
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
@@ -486,7 +545,7 @@ exports.getPlaylistSongs = function (req, res, next) {
         }
 
         
-	var query = client.query("select * from song, artist, album, includes where artist.artist_number=includes.artist_number and album.album_number=includes.album_number and song.song_number=includes.song_number and song.song_number in (SELECT song_number FROM belongs_in1 where playlist_number='"+req.params.number+"');");
+    var query = client.query("select * from song, artist, album, includes where artist.artist_number=includes.artist_number and album.album_number=includes.album_number and song.song_number=includes.song_number and song.song_number in (SELECT song_number FROM belongs_in1 where playlist_number='"+req.params.number+"');");
         // Stream results back one row at a time
         query.on('row', function(row) {
             results.push(row);
@@ -494,11 +553,11 @@ exports.getPlaylistSongs = function (req, res, next) {
         });
      
         
-	query.on('end', function() {
-		done();
-		return res.json(results);
-	});
-	
+    query.on('end', function() {
+        done();
+        return res.json(results);
+    });
+    
 
     });
 };
@@ -597,13 +656,13 @@ exports.addSongsToPlaylist = function (req, res, next) {
 };
 /*
 exports.create = function (req, res, next) {
-	var results = [];
-	console.log(req.body);
-	var data = {text: req.body.text, id: req.body.id};
-	//var data = {text: 'hihi', id: '9'};
-	
+    var results = [];
+    console.log(req.body);
+    var data = {text: req.body.text, id: req.body.id};
+    //var data = {text: 'hihi', id: '9'};
+    
     // Get a Postgres client from the connection pool
-    	pg.connect(connectionString, function(err, client, done) {
+        pg.connect(connectionString, function(err, client, done) {
         // Handle connection errors
         if(err) {
           done();
@@ -612,8 +671,8 @@ exports.create = function (req, res, next) {
         }
 
         // SQL Query > Select Data
-       	var query = client.query("INSERT INTO test(test,id) VALUES($1, $2);", [data.text, data.id]);
-	
+        var query = client.query("INSERT INTO test(test,id) VALUES($1, $2);", [data.text, data.id]);
+    
 
         // After all data is returned, close connection and return results
         var query = client.query("SELECT * FROM test ORDER BY id ASC;");
