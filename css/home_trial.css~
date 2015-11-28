@@ -1,0 +1,41 @@
+
+
+.songs_data {
+	display: inline-block;
+	width: 150px;
+	height: 200px;
+	margin: 20px;
+	padding: 16px;
+	vertical-align: top;
+	background: #eee;
+	border: 3px solid #ccc;
+	float:left;
+}
+
+.songs_data > img {
+	margin: 0 auto;
+	border: 3px solid #fbb829;
+	
+}
+
+
+#list_songs {
+	margin: 0 auto;
+	text-align: center;
+	
+}
+
+#list_songs > ul {
+	list-style: none;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	
+}
+#wrapper{
+	background-color: blue;
+}
+
+

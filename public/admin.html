@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="spotify" ng-controller="mainController">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SpotifyReg Home Page</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/home_trial.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../css/simple-sidebar.css" rel="stylesheet">
+    <script src="./public/angular.js"></script>
+    <script src="./public/app.js"></script>
+    
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a>
+                        SpotifyReg
+                    </a>
+                </li>
+                <li>
+                    <a href="#profile" data-toggle="tab">Profile</a>
+                </li>
+                <li>
+                    <a href="#search" data-toggle="tab">Search</a>
+                </li>
+                <li>
+                    <a href="#songs" data-toggle="tab">Songs</a>
+                </li>
+                <li>
+                    <a href="#artists" data-toggle="tab">Artists</a>
+                </li>
+                <li>
+                    <a href="#albums" data-toggle="tab">Albums</a>
+                </li>
+                <li>
+                    <a href="#playlists" data-toggle="tab">Playlists</a>
+                </li>
+                <li>
+                    <a ng-click="logout()" data-toggle="tab">Logout</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+        <div class="tab-content" ng-app="spotify">
+        	<div role="tabpanel" class="tab-pane active" id="profile">
+        		
+        		<a href="#menu-toggle" class="menu-toggle"> <img src="../images/menu.png" width="30px" height="30px"> </a>
+        		<h1>Profile</h1>
+        		<h3>Name: {{userData[0].name}} </h3>
+        		<h3>Email: {{userData[0].email}} </h3>
+        		<h3>Username: {{userData[0].username}} </h3>
+        		
+        		
+        	</div>
+        	
+        	<div role="tabpanel" class="tab-pane" id="search">
+        		
+        		<a href="#menu-toggle" class="menu-toggle"> <img src="../images/menu.png" width="30px" height="30px"> </a>
+        		<h1>Search</h1>
+        		<div id="custom-search-input">
+                            <div class="input-group col-md-4">
+                                <input type="text" class="form-control" placeholder="Search" ng-model="song.title" />
+                                <span class="input-group-btn">
+                                    <button class="btn" type="submit" ng-click="searchsongs()">
+                                        <span class=" glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                            <h3>Songs</h3>
+                            
+				
+                            <div id="list_songs">
+					<ul ng-repeat="song in searchSongs">
+					<span class="songs_data">
+		       			 <li><img src="../images/music.png" width="50px" height="50px">
+		       				<p class="song_title"> {{song.song_title}} </p>
+		       				<p class="song_number"> {{song.album_title}} </p>
+		       				<p class="song_number"> {{song.artist_name}} </p>
+		       			 </li>
+		       			 </span>
+		     			</ul>
+	      		    </div>
+	      		    
+	      		    <h3>Artists</h3>
+        		    <ul ng-repeat="artist in searchArtists">
+       			    <li>{{artist.artist_number}} {{artist.artist_name}}</li>
+     			    </ul>
+                        </div>
+        		
+        		
+        		
+        	</div>
+        	<div role="tabpanel" class="tab-pane" id="songs">
+        		
+				<a href="#menu-toggle" class="menu-toggle"> <img src="../images/menu.png" width="30px" height="30px"> </a>
+				<h1>Songs</h1>
+				<!-- Button trigger modal -->
+                            
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+				  Add a song
+				</button>
+
+				<!-- Modal -->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Add a Song</h4>
+				      </div>
+				      <div class="modal-body">
+							<form>
+							  <div class="form-group">
+							    <label for="title">Title</label>
+							    <input type="text" class="form-control" id="title" placeholder="Title" ng-model="song.addtitle">
+							  </div>
+							  <div class="form-group">
+							    <label for="artist">Artist</label>
+							    <input type="text" class="form-control" id="artist" placeholder="Artist" ng-model="song.addartist">
+							  </div>
+							  <div class="form-group">
+							    <label for="genre">Genre</label>
+							    <input type="text" class="form-control" id="genre" placeholder="Genre, Genre" ng-model="song.addgenre">
+							  </div>
+							  <div class="form-group">
+							    <label for="album">Album</label>
+							    <input type="text" class="form-control" id="album" placeholder="Album" ng-model="song.addalbum">
+							  </div>
+							  
+							
+				      </div>
+				      <div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary" ng-click="addSong()" data-dismiss="modal">Save changes</button>
+							</form>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				<div id="list_songs">
+					<ul ng-repeat="song in songsData">
+					<span class="songs_data">
+		       			 <li><img src="../images/music.png" width="50px" height="50px">
+		       				<p class="song_title"> {{song.song_title}} </p>
+		       				<p class="song_number"> {{song.album_title}} </p>
+		       				<p class="song_number"> {{song.artist_name}} </p>
+		       			 </li>
+		       			 </span>
+		     			</ul>
+	      			</div>
+      			
+        	</div>
+        	<div role="tabpanel" class="tab-pane" id="artists">
+        		<a href="#menu-toggle" class="menu-toggle"> <img src="../images/menu.png" width="30px" height="30px"> </a>
+        		<h1>Artists</h1>
+        		<ul ng-repeat="artist in artistData">
+       			 <li>{{artist.artist_number}} {{artist.artist_name}}</li>
+     			</ul>
+        		
+        	</div>
+        	<div role="tabpanel" class="tab-pane" id="albums">
+        		<a href="#menu-toggle" class="menu-toggle"> <img src="../images/menu.png" width="30px" height="30px"> </a>
+        		<h1>Albums</h1>
+        		<ul ng-repeat="album in albumData">
+       			 <li>{{album.album_number}} {{album.album_title}}</li>
+     			</ul>
+        		
+        	</div>
+        	<div role="tabpanel" class="tab-pane" id="playlists">
+        		<a href="#menu-toggle" class="menu-toggle"> <img src="../images/menu.png" width="30px" height="30px"> </a>
+        		<h1>Playlists</h1>
+        		
+        	</div>
+        </div>
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../js/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+	    $(".menu-toggle").click(function(e) {
+	    	
+		e.preventDefault();
+		$("#wrapper").toggleClass("toggled");
+	    });
+    	
+    </script>
+
+</body>
+
+</html>

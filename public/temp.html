@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html ng-app="spotify">
+  <head>
+    <title>Spotify</title>
+     <script src="angular.js"></script>
+    <script src="app.js"></script>
+   
+  </head>
+  <body ng-controller="mainController">
+    <div class="container">
+     	 <form>
+    	
+     	 	<input type="text" placeholder="Add an id..." ng-model="formData.id">
+    		<input type="text" placeholder="Add a text..." ng-model="formData.text">
+   	 	<button type="submit" ng-click="createSong()" >Add Test</button>
+ 	</form>
+ 	<ul ng-repeat="song in songsData">
+        <li>{{song.id}} {{song.test}}</li>
+      </ul>
+    </div>
+    
+   
+   
+  </body>
+</html>

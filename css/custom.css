@@ -1,0 +1,33 @@
+div#home_text{
+	color: white;
+	position:absolute; 
+	top:50px;
+	width: 100%;
+}
+#home_cont{
+}
+
+#home_row{
+}
+
+#home_login{
+	background-color: blue;
+}
+
+#home_features{
+	background-color: yellow;
+}
+
+.container{
+	display: flex;
+	justify-content: center;
+}
+#form_login {
+    margin-top: 9%;
+}
+#tabs{
+	
+}
+.navexample{
+	background-color: blue;
+}
