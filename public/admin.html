@@ -119,7 +119,41 @@
                                             </tr>
                                         </tbody>
                             </table>
-                    
+                            
+                    <h3> Album </h3>
+                        <div class="panel-group" id="accordion6" role="tablist" aria-multiselectable="true">
+                          <div class="panel panel-default" ng-repeat="album in searchAlbum">
+                            <div class="panel-heading" role="tab">
+                              <h4 class="panel-title">
+                            <a role="button" role="button" data-toggle="collapse" data-parent="#accordion6" ng-attr-href="{{'#album'+album.album_number}}" aria-expanded="true" ng-attr-aria-controls="{{'#album'+album.album_number}}" ng-click="getAlbumSongs(album)">
+                             {{album.album_title}}
+                            </a>
+                              </h4>
+                            </div>
+                            <div ng-attr-id="{{'album'+album.album_number}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                        <table class="table table-condensed">
+                                                               <thead> 
+                                                                    <th>Song Title</th>
+                                                                    <th>Album Title</th>
+                                                                    <th>Artist Name</th>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="eachsong in albumSongs">
+                                                                        <td> {{eachsong.song_title}}</td>
+                                                                        <td> {{eachsong.album_title}} </td>
+                                                                        <td> {{eachsong.artist_name}} </td>
+                                                                        <td> <audio controls>
+                                                                                <source ng-src="{{'../music/'+eachsong.song_title+'.mp3'}}" type="audio/mpeg">
+                                                                                Your browser does not support the audio element.
+                                                                                </audio>  </td>
+                                                                    </tr>
+                                                                </tbody>
+                                        </table>
+                              </div>
+                            </div>
+                          </div>
+
+
                     <h3>Artists</h3>
                                 <div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">
                                     <div class="panel panel-default" ng-repeat="artist in searchArtists">

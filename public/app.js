@@ -14,6 +14,7 @@ angular.module("spotify", [])
     $scope.userData = {};
     $scope.searchSongs = {};
     $scope.searchArtists = {};
+    $scope.searchAlbum = {};
     $scope.playlists = {};
     $scope.playlistsSongs = {};
     $scope.songsNotInPlaylist = {};
@@ -279,7 +280,17 @@ angular.module("spotify", [])
         })
         .error(function(error) {
             console.log('Error: ' + error);
-    });
+        });
+        $http.get('/album/'+$scope.song.title)
+        .success(function(data) {
+            //console.log(data);
+            $scope.searchAlbum = data;
+           
+        })
+        .error(function(error) {
+            console.log('Error: ' + error);
+        });
+
     }
     $scope.addSong = function() {
     
@@ -312,15 +323,30 @@ angular.module("spotify", [])
     
     }
     $scope.signUp = function() {
-    	$http.post('/pending/'+$scope.signup.username+'/'+$scope.signup.password+'/'+$scope.signup.name+'/'+$scope.signup.email)
+        $http.get('/uniqueusername/'+$scope.signup.username)
         .success(function(data) {
-            alert('Pending User Request');
-           
+            if(data.length===0){
+                $http.post('/pending/'+$scope.signup.username+'/'+$scope.signup.password+'/'+$scope.signup.name+'/'+$scope.signup.email)
+                .success(function(data) {
+                    alert('Pending User Request');
+                   
+                   
+                })
+                .error(function(error) {
+                    console.log('Error: ' + error);
+                });
+
+            }
+            else{
+                alert('The username is already taken');
+            }
            
         })
         .error(function(error) {
             console.log('Error: ' + error);
             });
+
+    	
         
     
     }

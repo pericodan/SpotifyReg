@@ -142,6 +142,7 @@ app.use('/', express.static(__dirname));
 app.get('/songs', songs.findAllSongs);
 app.get('/artists', songs.findAllArtists);
 app.get('/albums', songs.findAllAlbums);
+app.get('/album/:title', songs.findAlbum);
 app.get('/albumSongs/:number', songs.getAlbumSongs);
 app.get('/users/:username/:password', songs.getUser);
 app.get('/users/:username', songs.getUser2);
@@ -153,6 +154,7 @@ app.post('/songs/:title/:artist/:genre/:album', songs.addSong);
 app.post('/includes/:title/:artist/:album', songs.addSongToIncludes);
 app.post('/pending/:username/:password/:name/:email', songs.addPending);
 app.get('/playlist/:title/:username/:genre', songs.addPlaylist);
+app.get('/uniqueusername/:username', songs.checkUsername);
 
 app.get('/playlist/:username', songs.getPlaylist);
 app.get('/playlistSongs/:number', songs.getPlaylistSongs);

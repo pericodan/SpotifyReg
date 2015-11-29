@@ -191,6 +191,37 @@ exports.findAllAlbums = function (req, res, next) {
     });
 };
 
+exports.findAlbum = function (req, res, next) {
+    var results = [];
+
+    // Get a Postgres client from the connection pool
+    pg.connect(connectionString, function(err, client, done) {
+        // Handle connection errors
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+
+        // SQL Query > Select Data
+        var query = client.query("SELECT * FROM album where lower(album_title) like lower('%"+req.params.title+"%') ORDER BY album_number ASC;");
+
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            results.push(row);
+        });
+        
+        
+
+        // After all data is returned, close connection and return results
+        query.on('end', function() {
+            done();
+            return res.json(results);
+        });
+
+    });
+};
+
 exports.getAlbumSongs = function (req, res, next) {
     var results = [];
 
@@ -238,6 +269,42 @@ exports.getUser = function (req, res, next) {
 
         // SQL Query > Select Data
        var query = client.query("select * from user_profile, non_admin where non_admin.username='"+req.params.username+"' and user_profile.user_password='"+req.params.password+"' and non_admin.username=user_profile.username and non_admin.admin_id is not null;");
+       
+       //var query = client.query("select * from user_profile, non_admin where non_admin.username='perico' and user_profile.user_password='dan' and non_admin.username=user_profile.username;");
+
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            
+            results.push(row);
+        });
+        
+        
+
+        // After all data is returned, close connection and return results
+        query.on('end', function() {
+            done();
+            return res.json(results);
+        });
+
+    });
+};
+
+exports.checkUsername = function (req, res, next) {
+    var results = [];
+    
+    
+    // Get a Postgres client from the connection pool
+    pg.connect(connectionString, function(err, client, done) {
+        // Handle connection errors
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+        
+
+        // SQL Query > Select Data
+       var query = client.query("select * from user_profile where username='"+req.params.username+"';");
        
        //var query = client.query("select * from user_profile, non_admin where non_admin.username='perico' and user_profile.user_password='dan' and non_admin.username=user_profile.username;");
 
