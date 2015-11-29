@@ -46,10 +46,10 @@ app.post('/login/:username/:password/:is_admin',function(req,res){
 	sess.username=req.params.username;
 	sess.password=req.params.password;
 	if(req.params.is_admin==='true'){
-		is_admin=true;
+		sess.is_admin=true;
 	}
 	else{
-		is_admin=false;
+		sess.is_admin=false;
 	}
 	username=req.params.username;
 	password=req.params.password;
@@ -59,10 +59,10 @@ app.post('/login/:username/:password/:is_admin',function(req,res){
 
 app.get('/home',function(req,res){
 	sess=req.session;
-	if(sess.username&&is_admin===false){
+	if(sess.username&&sess.is_admin===false){
 		res.render('index.html');
 	}
-	else if(sess.username&&is_admin){
+	else if(sess.username&&sess.is_admin){
 		res.redirect('/admin');
 	}
 	else{
@@ -73,7 +73,7 @@ app.get('/home',function(req,res){
 
 app.get('/admin',function(req,res){
 	sess=req.session;
-	if(sess.username&&is_admin){
+	if(sess.username&&sess.is_admin){
 		res.render('admin.html');
 	}
 	else if(sess.username){
@@ -104,7 +104,7 @@ app.get('/getuserinfo', function(req,res){
 	
 	//sess=req.session;
 	if(sess.username){
-		res.redirect('/users/'+username)	
+		res.redirect('/users/'+sess.username)	
 	}
 	
 });
@@ -112,7 +112,7 @@ app.get('/getuserinfo', function(req,res){
 app.get('/getPlaylist', function(req,res){
 	
 	if(sess.username){
-		res.redirect('/playlist/'+username)	
+		res.redirect('/playlist/'+sess.username)	
 	}
 	
 });
@@ -120,7 +120,15 @@ app.get('/getPlaylist', function(req,res){
 app.post('/addPlaylist/:title/:genre', function(req,res){
 	
 	if(sess.username){
-		res.redirect('/playlist/'+req.params.title+'/'+username+'/'+req.params.genre)	
+		res.redirect('/playlist/'+req.params.title+'/'+sess.username+'/'+req.params.genre)	
+	}
+	
+});
+
+app.put('/approveuser/:username', function(req,res){
+	
+	if(sess.username){
+		res.redirect('/approveduser/'+sess.username+'/'+req.params.username)	
 	}
 	
 });
@@ -151,6 +159,12 @@ app.get('/playlistSongs/:number', songs.getPlaylistSongs);
 app.get('/notinplaylistSongs/:number', songs.getNotInPlaylistSongs);
 app.delete('/playlistSongs/:songnumber/:playlistnumber', songs.deletePlaylistSongs);
 app.post('/addplaylistSongs/:songnumber/:artistnumber/:albumnumber/:playlistnumber', songs.addSongsToPlaylist);
+
+
+app.get('/pendingusers', songs.findPendingUsers);
+app.put('/approveduser/:adminusername/:username', songs.approvePendingUsers);
+app.delete('/disapproveuser/:username', songs.disapprovePendingUsers);
+
 //app.post('/songs', songs.create);
 app.set('port', process.env.PORT || 8000);
 app.listen(app.get('port'), function () {

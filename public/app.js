@@ -20,6 +20,7 @@ angular.module("spotify", [])
     $scope.a = {};
     $scope.artistSongs = {};
     $scope.albumSongs = {};
+    $scope.pendingUsers = {};
     var a;
     
     $http.get('/getPlaylist')
@@ -55,6 +56,20 @@ angular.module("spotify", [])
     
     }
 
+    $scope.getPendingUsers = function() {
+    
+            $http.get('/pendingusers/')
+            .success(function(data) {
+             
+                 $scope.pendingUsers = data;
+            })
+            
+            .error(function(error) {
+                console.log('Error: ' + error);
+            });
+    
+    }
+
     $scope.getPlaylistSongs = function(playlist) {
     
     		$http.get('/playlistSongs/'+playlist.playlist_number)
@@ -69,7 +84,48 @@ angular.module("spotify", [])
     
     }
 
+    $scope.approvedUser = function(user) {
     
+            $http.put('/approveuser/'+user.username)
+            .success(function(data) {
+             
+                 $http.get('/pendingusers/')
+                .success(function(data) {
+                 
+                     $scope.pendingUsers = data;
+                })
+                
+                .error(function(error) {
+                    console.log('Error: ' + error);
+                });
+            })
+            
+            .error(function(error) {
+                console.log('Error: ' + error);
+            });
+    
+    }
+    $scope.disapprovedUser = function(user) {
+    
+            $http.delete('/disapproveuser/'+user.username)
+            .success(function(data) {
+             
+                 $http.get('/pendingusers/')
+                .success(function(data) {
+                 
+                     $scope.pendingUsers = data;
+                })
+                
+                .error(function(error) {
+                    console.log('Error: ' + error);
+                });
+            })
+            
+            .error(function(error) {
+                console.log('Error: ' + error);
+            });
+    
+    }
     
     $scope.getSongsNotInPlaylist = function(playlist) {
     

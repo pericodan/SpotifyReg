@@ -225,7 +225,7 @@ exports.getAlbumSongs = function (req, res, next) {
 exports.getUser = function (req, res, next) {
     var results = [];
     
-    var data = {username: req.params.username, password: req.params.password};
+    
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
         // Handle connection errors
@@ -234,9 +234,10 @@ exports.getUser = function (req, res, next) {
           console.log(err);
           return res.status(500).json({ success: false, data: err});
         }
+        
 
         // SQL Query > Select Data
-       var query = client.query("select * from user_profile, non_admin where non_admin.username='"+req.params.username+"' and user_profile.user_password='"+req.params.password+"' and non_admin.username=user_profile.username;");
+       var query = client.query("select * from user_profile, non_admin where non_admin.username='"+req.params.username+"' and user_profile.user_password='"+req.params.password+"' and non_admin.username=user_profile.username and non_admin.admin_id is not null;");
        
        //var query = client.query("select * from user_profile, non_admin where non_admin.username='perico' and user_profile.user_password='dan' and non_admin.username=user_profile.username;");
 
@@ -260,7 +261,7 @@ exports.getUser = function (req, res, next) {
 exports.getUser2 = function (req, res, next) {
     var results = [];
     
-    var data = {username: req.params.username, password: req.params.password};
+    
     // Get a Postgres client from the connection pool
     pg.connect(connectionString, function(err, client, done) {
         // Handle connection errors
@@ -272,6 +273,111 @@ exports.getUser2 = function (req, res, next) {
 
         // SQL Query > Select Data
        var query = client.query("select * from user_profile where username='"+req.params.username+"';");
+       
+       //var query = client.query("select * from user_profile, non_admin where non_admin.username='perico' and user_profile.user_password='dan' and non_admin.username=user_profile.username;");
+
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            
+            results.push(row);
+        });
+        
+        
+
+        // After all data is returned, close connection and return results
+        query.on('end', function() {
+            done();
+            return res.json(results);
+        });
+
+    });
+};
+
+exports.findPendingUsers = function (req, res, next) {
+    var results = [];
+    
+   
+    // Get a Postgres client from the connection pool
+    pg.connect(connectionString, function(err, client, done) {
+        // Handle connection errors
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+
+        // SQL Query > Select Data
+       var query = client.query("select * from user_profile, non_admin where non_admin.username=user_profile.username and non_admin.admin_id is null;");
+       
+       //var query = client.query("select * from user_profile, non_admin where non_admin.username='perico' and user_profile.user_password='dan' and non_admin.username=user_profile.username;");
+
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            
+            results.push(row);
+        });
+        
+        
+
+        // After all data is returned, close connection and return results
+        query.on('end', function() {
+            done();
+            return res.json(results);
+        });
+
+    });
+};
+
+exports.approvePendingUsers = function (req, res, next) {
+    var results = [];
+    
+    
+    // Get a Postgres client from the connection pool
+    pg.connect(connectionString, function(err, client, done) {
+        // Handle connection errors
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+
+        // SQL Query > Select Data
+       var query = client.query("update non_admin set admin_id=(select admin_id from (select * from admin) as k where username='"+req.params.adminusername+"'), approved_date=now()::date where username='"+req.params.username+"';");
+       
+       //var query = client.query("select * from user_profile, non_admin where non_admin.username='perico' and user_profile.user_password='dan' and non_admin.username=user_profile.username;");
+
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            
+            results.push(row);
+        });
+        
+        
+
+        // After all data is returned, close connection and return results
+        query.on('end', function() {
+            done();
+            return res.json(results);
+        });
+
+    });
+};
+
+exports.disapprovePendingUsers = function (req, res, next) {
+    var results = [];
+    
+    
+    // Get a Postgres client from the connection pool
+    pg.connect(connectionString, function(err, client, done) {
+        // Handle connection errors
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+
+        // SQL Query > Select Data
+       var query = client.query("delete from user_profile where username='"+req.params.username+"';");
        
        //var query = client.query("select * from user_profile, non_admin where non_admin.username='perico' and user_profile.user_password='dan' and non_admin.username=user_profile.username;");
 
@@ -338,12 +444,16 @@ exports.addPending = function (req, res, next) {
         }
 
         // SQL Query > Select Data
-       var query = client.query("insert into pending_user values('"+req.params.username+"', '"+req.params.password+"', '"+req.params.name+"', '"+req.params.email+"');");
+       var query = client.query("insert into user_profile(username, user_password, name, email) values('"+req.params.username+"', '"+req.params.password+"', '"+req.params.name+"', '"+req.params.email+"');");
        
         // After all data is returned, close connection and return results
         query.on('end', function() {
             done();
-            return res.json(results);
+            var query = client.query("insert into non_admin(username) values('"+req.params.username+"');");
+             query.on('end', function() {
+                done();
+                return res.json(results);
+                });
         });
 
     });

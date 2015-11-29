@@ -15,6 +15,7 @@ CREATE TABLE admin(
 CREATE TABLE non_admin(
 	non_admin_id	serial PRIMARY KEY,
 	username	varchar(20) REFERENCES user_profile(username) ON UPDATE CASCADE ON DELETE CASCADE,
+	approved_date date,
 	admin_id	integer REFERENCES admin(admin_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
