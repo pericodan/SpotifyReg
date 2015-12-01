@@ -1,3 +1,111 @@
+body#home-body {
+	color: #fff;
+	text-align: center;
+	text-shadow: 0 1px 3px rgba(0,0,0,.5);
+	overflow-y: hidden !important;
+	overflow-x: hidden !important;
+	width: 100%;
+	background-color: #101010;
+}
+/*Home Page*/
+div#home-text{
+
+	position:absolute; 
+	top:20px;
+	width: 100%;
+	height: 100%;
+}
+
+div#left{
+	float: left;
+}
+
+div#right{
+	float: right;
+	padding-top: 50px;
+	width: 30%;
+}
+
+div#login, div#register{
+	width: 100%;
+}
+
+div.vertical-center {
+	/*min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+	/*min-height: 100vh; /* These two lines are counted as one :-)       */
+	display: flex;
+	align-items: center;
+}
+
+label.labels{
+	text-align: left;
+}
+
+.img-carousel{
+	background-size: 100% auto;
+}
+
+.btn-default,
+.btn-default:hover,
+.btn-default:focus {
+	color: #333;
+	text-shadow: none; /* Prevent inheritence from `body` */
+	background-color: #fff;
+	border: 1px solid #fff;
+}
+
+/*Main Page*/
+body#main-body{
+	color: black;
+	text-align: center;
+	text-shadow: 0 1px 3px rgba(0,0,0,.5);
+	background-color: #101010;
+	overflow-y: auto;
+}
+
+li.list-group-item{
+	text-align: center;
+}
+
+div.tab-content{
+	height: 100%;
+	width: 100%;
+}
+
+div.tab-pane{
+	height: 100%;
+	width: 100%;
+	padding: 20px;
+}
+
+div#main-panel{
+	/*position: fixed;*/
+	top: 20px; 
+	width: 100%;
+	height: 100%;
+}
+
+div#main-panel h1, h3{
+	color: white;
+}
+
+div#main-row-1, div#main-row-2{
+	padding: 20px;
+}
+
+.thumbnail {
+    padding: 0 0 15px 0;
+    border: none;
+    border-radius: 0;
+    background-color: #fff;
+}
+
+.thumbnail img {
+   /* width: 100%;
+   height: 100%;*/
+    margin-bottom: 10px;
+}
+
 div#home_text{
 	color: white;
 	position:absolute; 
@@ -30,4 +138,28 @@ div#home_text{
 }
 .navexample{
 	background-color: blue;
+}
+
+.imagebutton{
+
+
+
+            background-color: Transparent;
+            background-repeat:no-repeat;
+            border: none;
+            cursor:pointer;
+            overflow: hidden;
+
+       
+}
+div.panel-body{
+	
+	background-color: #101010;
+
+}
+
+#requests{
+
+	color:white;
+	text-align: left;
 }

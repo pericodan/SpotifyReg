@@ -11,9 +11,9 @@ var songs = require('./server/songs');
 var app = express();
 var session = require('express-session');
 
-var username;
-var password;
-var is_admin=false;
+//var username;
+//var password;
+//var is_admin=false;
 
 //app.use(bodyParser.json());
 
@@ -51,8 +51,8 @@ app.post('/login/:username/:password/:is_admin',function(req,res){
 	else{
 		sess.is_admin=false;
 	}
-	username=req.params.username;
-	password=req.params.password;
+	//username=req.params.username;
+	//password=req.params.password;
 	//res.redirect('/home');
 	res.end('done');
 });
@@ -155,6 +155,8 @@ app.post('/includes/:title/:artist/:album', songs.addSongToIncludes);
 app.post('/pending/:username/:password/:name/:email', songs.addPending);
 app.get('/playlist/:title/:username/:genre', songs.addPlaylist);
 app.get('/uniqueusername/:username', songs.checkUsername);
+app.get('/approveduser', songs.getApprovedUsers);
+app.get('/updatetimesplayed/:number', songs.updateTimesPlayed);
 
 app.get('/playlist/:username', songs.getPlaylist);
 app.get('/playlistSongs/:number', songs.getPlaylistSongs);

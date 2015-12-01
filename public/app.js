@@ -22,6 +22,7 @@ angular.module("spotify", [])
     $scope.artistSongs = {};
     $scope.albumSongs = {};
     $scope.pendingUsers = {};
+    $scope.approvedUsers = {};
     var a;
     
     $http.get('/getPlaylist')
@@ -57,12 +58,39 @@ angular.module("spotify", [])
     
     }
 
+    $scope.updateTimesPlayed = function(song) {
+    console.log('hello');
+            $http.get('/updatetimesplayed/'+song.song_number)
+            .success(function(data) {
+             
+            })
+            
+            .error(function(error) {
+                console.log('Error: ' + error);
+            });
+    
+    }
+
     $scope.getPendingUsers = function() {
     
             $http.get('/pendingusers/')
             .success(function(data) {
              
                  $scope.pendingUsers = data;
+            })
+            
+            .error(function(error) {
+                console.log('Error: ' + error);
+            });
+    
+    }
+
+    $scope.getApprovedUsers = function() {
+    
+            $http.get('/approveduser/')
+            .success(function(data) {
+             
+                 $scope.approvedUsers = data;
             })
             
             .error(function(error) {

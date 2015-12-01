@@ -22,7 +22,7 @@ exports.findAllSongs = function (req, res, next) {
         }
 
         // SQL Query > Select Data
-        var query = client.query("select * from song, artist, album, includes where artist.artist_number=includes.artist_number and album.album_number=includes.album_number and song.song_number=includes.song_number;");
+        var query = client.query("select * from song, artist, album, includes where artist.artist_number=includes.artist_number and album.album_number=includes.album_number and song.song_number=includes.song_number order by song.song_number;");
 
         // Stream results back one row at a time
         query.on('row', function(row) {
@@ -360,6 +360,41 @@ exports.getUser2 = function (req, res, next) {
     });
 };
 
+exports.getApprovedUsers = function (req, res, next) {
+    var results = [];
+    
+    
+    // Get a Postgres client from the connection pool
+    pg.connect(connectionString, function(err, client, done) {
+        // Handle connection errors
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+
+        // SQL Query > Select Data
+       var query = client.query("select * from user_profile, non_admin where user_profile.username=non_admin.username and non_admin.admin_id is not null order by approved_date desc;");
+       
+       //var query = client.query("select * from user_profile, non_admin where non_admin.username='perico' and user_profile.user_password='dan' and non_admin.username=user_profile.username;");
+
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            
+            results.push(row);
+        });
+        
+        
+
+        // After all data is returned, close connection and return results
+        query.on('end', function() {
+            done();
+            return res.json(results);
+        });
+
+    });
+};
+
 exports.findPendingUsers = function (req, res, next) {
     var results = [];
     
@@ -410,6 +445,41 @@ exports.approvePendingUsers = function (req, res, next) {
 
         // SQL Query > Select Data
        var query = client.query("update non_admin set admin_id=(select admin_id from (select * from admin) as k where username='"+req.params.adminusername+"'), approved_date=now()::date where username='"+req.params.username+"';");
+       
+       //var query = client.query("select * from user_profile, non_admin where non_admin.username='perico' and user_profile.user_password='dan' and non_admin.username=user_profile.username;");
+
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            
+            results.push(row);
+        });
+        
+        
+
+        // After all data is returned, close connection and return results
+        query.on('end', function() {
+            done();
+            return res.json(results);
+        });
+
+    });
+};
+
+exports.updateTimesPlayed = function (req, res, next) {
+    var results = [];
+    
+    
+    // Get a Postgres client from the connection pool
+    pg.connect(connectionString, function(err, client, done) {
+        // Handle connection errors
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+        console.log('hi');
+        // SQL Query > Select Data
+       var query = client.query("update song set times_played=times_played+1 where song_number="+req.params.number+";");
        
        //var query = client.query("select * from user_profile, non_admin where non_admin.username='perico' and user_profile.user_password='dan' and non_admin.username=user_profile.username;");
 
