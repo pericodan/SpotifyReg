@@ -29,12 +29,20 @@ angular.module("spotify", [])
     $scope.notRecommended = {};
     $scope.mostRecommended = {};
     $scope.mostPlayed = {};
+    $scope.topAlbum = {};
 
     var a;
     
     $http.get('/getPlaylist')
         .success(function(data) {
             $scope.playlists = data;
+        })
+        .error(function(error) {
+            console.log('Error: ' + error);
+    });
+    $http.get('/mostrecommendedalbum')
+        .success(function(data) {
+            $scope.topAlbum = data;
         })
         .error(function(error) {
             console.log('Error: ' + error);
