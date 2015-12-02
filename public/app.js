@@ -27,6 +27,8 @@ angular.module("spotify", [])
     $scope.currentAlbum = {};
     $scope.currentPlaylist = {};
     $scope.notRecommended = {};
+    $scope.mostRecommended = {};
+    $scope.mostPlayed = {};
 
     var a;
     
@@ -37,10 +39,17 @@ angular.module("spotify", [])
         .error(function(error) {
             console.log('Error: ' + error);
     });
+    $http.get('/mostplayed')
+        .success(function(data) {
+            $scope.mostPlayed = data;
+        })
+        .error(function(error) {
+            console.log('Error: ' + error);
+    });
 
-    $http.get('/notRecommended')
+    $http.get('/mostrecommended')
     .success(function(data) {
-        $scope.notRecommended = data;
+        $scope.mostRecommended = data;
     })
     .error(function(error) {
         console.log('Error: ' + error);
