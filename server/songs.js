@@ -84,7 +84,38 @@ exports.mostRecommendedArtist = function (req, res, next) {
         }
 
         // SQL Query > Select Data
-        var query = client.query("select * from artist, includes where artist.artist_number=includes.artist_number and song_number in (select song_number from recommendations group by song_number order by count(username) desc) limit 10;");
+        var query = client.query("select distinct artist.artist_number, artist_name from artist, includes where artist.artist_number=includes.artist_number and song_number in (select song_number from recommendations group by song_number order by count(username) desc) limit 10;");
+
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            results.push(row);
+        });
+        
+        
+
+        // After all data is returned, close connection and return results
+        query.on('end', function() {
+            done();
+            return res.json(results);
+        });
+
+    });
+};
+
+exports.getGenres = function (req, res, next) {
+    var results = [];
+
+    // Get a Postgres client from the connection pool
+    pg.connect(connectionString, function(err, client, done) {
+        // Handle connection errors
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+
+        // SQL Query > Select Data
+        var query = client.query("select distinct lower(genre) as genre from song_genre;");
 
         // Stream results back one row at a time
         query.on('row', function(row) {
@@ -115,7 +146,7 @@ exports.mostRecommendedAlbum = function (req, res, next) {
         }
 
         // SQL Query > Select Data
-        var query = client.query("select * from album, includes where album.album_number=includes.album_number and song_number in (select song_number from recommendations group by song_number order by count(username) desc) limit 10;");
+        var query = client.query("select distinct album.album_number, album_title from album, includes where album.album_number=includes.album_number and song_number in (select song_number from recommendations group by song_number order by count(username) desc) limit 10;");
 
         // Stream results back one row at a time
         query.on('row', function(row) {

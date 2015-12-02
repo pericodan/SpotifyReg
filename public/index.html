@@ -106,7 +106,7 @@
                         <div class = "col-sm-2">
                                 <a href="#artistpage2" ng-click="getArtistSongs(artist)" data-toggle="tab">
                                     <div class = "thumbnail">
-                                        <img src = "images/album.jpg" alt = "artist" >
+                                        <img src = "images/artist.jpg" alt = "artist" >
                                         <p> <strong>{{ artist.artist_name }}</strong> </p>
                                     </div>
                                 </a>
@@ -338,13 +338,13 @@
                             </a>
                         </div>
                     </div>
-                    <div class = "container-fluid row text-center bg-grey" id = "main-genre">
-                        <div class = "row" ng-repeat="genre in genres">
-                            <div class = "col-sm-2" id = "genre-opm">
+                    <div class = "container-fluid row text-center bg-grey" id = "main-genre" >
+                        <div class = "row" >
+                            <div class = "col-sm-2" ng-repeat="genre in genres">
                                 <a href = "#" data-toggle="tab">
                                     <div class = "thumbnail">
                                         <img ng-attr-src = "{{'images/'+genre.genre+'.jpg'}}">
-                                        <p> <strong> {{genre.genre}} </strong> </p>
+                                        <p> <strong> {{genre.genre | uppercase}} </strong> </p>
                                     </div>
                                 </a>
                             </div>

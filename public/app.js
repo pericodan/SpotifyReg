@@ -31,12 +31,21 @@ angular.module("spotify", [])
     $scope.mostPlayed = {};
     $scope.topAlbum = {};
     $scope.topArtist = {};
+    $scope.genres = {};
+
 
     var a;
     
     $http.get('/getPlaylist')
         .success(function(data) {
             $scope.playlists = data;
+        })
+        .error(function(error) {
+            console.log('Error: ' + error);
+    });
+    $http.get('/genres')
+        .success(function(data) {
+            $scope.genres = data;
         })
         .error(function(error) {
             console.log('Error: ' + error);
