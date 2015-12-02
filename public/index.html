@@ -82,7 +82,163 @@
         </div>
         
         <div class="tab-content" id = "main-panel" ng-app="spotify">
-            <div role="tabpanel" class="tab-pane active" id="profile">
+
+            <div class="tab-pane active" id="main">
+                    <div class = "row" id  = "main-row-1">
+                        <!--Menu Button-->
+                       <div class = "container col-xs-1">
+                            <a href="#menu-toggle" class="menu-toggle" id="menu-toggle-profile"> 
+                                <button type = "button" class="btn btn-default" > 
+                                    <span class = "glyphicon glyphicon-align-justify"> </span>
+                                </button>
+                            </a>
+                        </div><!--/Menu Button-->
+                        <div class = "container col-xs-1">
+                            <a href="#main-chart" id="button-main-chart"> 
+                                <button type = "button" class="btn btn-default" id = "button-chart"> 
+                                    <span class = "glyphicon glyphicon-stats"> </span> Charts
+                                </button>
+                            </a>
+                        </div>
+                        <div class = "container col-xs-1">
+                            <a href="#main-genre" id="button-main-genre"> 
+                                <button type = "button" class="btn btn-default" id = "button-genre"> 
+                                    <span class = "glyphicon glyphicon-globe"> </span> Genre
+                                </button>
+                            </a>
+                        </div>
+                    </div> 
+                    <div class = "container-fluid row text-center bg-grey" id = "main-chart">
+                        <div class = "col-sm-4" id = "div-top-songs">
+                            <a href = "#">
+                                <div class = "thumbnail">
+                                    <img src = "images/topsongs.jpg" alt = "Top Songs">
+                                    <p> <strong> Top Songs </strong> </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class = "col-sm-4" id = "div-top-artists">
+                            <a href = "#">
+                                <div class = "thumbnail">
+                                    <img src = "images/topartists.jpg" alt = "Top Artists">
+                                    <p> <strong> Top Artists </strong> </p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class = "col-sm-4" id = "div-top-albums">
+                            <a href = "#">
+                                <div class = "thumbnail">
+                                    <img src = "images/topalbums.jpg" alt = "Top Albums">
+                                    <p> <strong> Top Albums </strong> </p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class = "container-fluid row text-center bg-grey" id = "main-genre">
+                        <div class = "row" id = "main-genre-row1">
+                            <div class = "col-sm-2" id = "genre-opm">
+                                <a href = "#">
+                                    <div class = "thumbnail">
+                                        <img src = "images/opm.jpg" alt = "OPM">
+                                        <p> <strong> OPM </strong> </p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class = "col-sm-2" id = "genre-rnb">
+                                <a href = "#">
+                                    <div class = "thumbnail">
+                                        <img src = "images/rnb.jpg" alt = "rnb">
+                                        <p> <strong> RnB </strong> </p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class = "col-sm-2" id = "genre-edm-dance">
+                                <a href = "#">
+                                    <div class = "thumbnail">
+                                        <img src = "images/edm-dance.jpg" alt = "edm-dance" >
+                                        <p> <strong> EDM/Dance </strong> </p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class = "col-sm-2" id = "genre-hiphop">
+                                <a href = "#">
+                                    <div class = "thumbnail">
+                                        <img src = "images/hiphop.jpg" alt = "hiphop" >
+                                        <p> <strong> Hip hop </strong> </p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class = "col-sm-2" id = "genre-country">
+                                <a href = "#">
+                                    <div class = "thumbnail">
+                                        <img src = "images/country.jpg" alt = "country" >
+                                        <p> <strong> Country </strong> </p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class = "col-sm-2" id = "genre-metal">
+                                <a href = "#">
+                                    <div class = "thumbnail">
+                                        <img src = "images/metal.jpg" alt = "metal" >
+                                        <p> <strong> Metal </strong> </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class = "row" id = "main-genre-row2">
+                            <div class = "col-sm-2" id = "genre-rocknroll">
+                                <a href = "#">
+                                    <div class = "thumbnail">
+                                        <img src = "images/rocknroll.jpg" alt = "rocknroll" >
+                                        <p> <strong> Rock n' Roll </strong> </p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class = "col-sm-2" id = "genre-indie-alt">
+                                <a href = "#">
+                                    <div class = "thumbnail">
+                                        <img src = "images/indie-alt.jpg" alt = "indie-alt" >
+                                        <p> <strong> Indie/Alternative </strong> </p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class = "col-sm-2" id = "genre-classical">
+                                <a href = "#">
+                                    <div class = "thumbnail">
+                                        <img src = "images/classical.jpg" alt = "classical" >
+                                        <p> <strong> Classical </strong> </p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class = "col-sm-2" id = "genre-blues">
+                                <a href = "#">
+                                    <div class = "thumbnail">
+                                        <img src = "images/blues.jpg" alt = "blues" >
+                                        <p> <strong> Blues </strong> </p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class = "col-sm-2" id = "genre-pop">
+                                <a href = "#">
+                                    <div class = "thumbnail">
+                                        <img src = "images/pop.jpg" alt = "pop" >
+                                        <p> <strong> Pop </strong> </p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class = "col-sm-2" id = "genre-jazz">
+                                <a href = "#">
+                                    <div class = "thumbnail">
+                                        <img src = "images/jazz.jpg" alt = "jazz" >
+                                        <p> <strong> Jazz </strong> </p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <div role="tabpanel" class="tab-pane" id="profile">
                 
                 <div class = "container col-xs-1">
                             <a href="#menu-toggle" class="menu-toggle" id="menu-toggle-profile"> 
@@ -157,7 +313,7 @@
                                             
                                                 <div class = "col-sm-2"   >    
                                                     <div class = "thumbnail">
-                                                        <button class="imagebutton" type="button" data-toggle="modal" ng-attr-data-target="{{'#searchsong'+eachsong.song_number}}">
+                                                        <button class="imagebutton" type="button" ng-click="updateTimesPlayed(eachsong)" data-toggle="modal" ng-attr-data-target="{{'#searchsong'+eachsong.song_number}}">
                                                             <img src = "../images/music.png" width="50px" height="50px" />
                                                         </button>
                                                             <div class="modal fade" ng-attr-id="{{'searchsong'+eachsong.song_number}}" tabindex="-1" role="dialog">
@@ -205,12 +361,13 @@
                               </h4>
                             </div>
                             <div ng-attr-id="{{'album'+album.album_number}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                        <div class="panel-body">
                                         <div class = "container-fluid row text-center bg-grey">
                                         <div ng-repeat="eachsong in albumSongs">
                                             
                                                 <div class = "col-sm-2"   >    
                                                     <div class = "thumbnail">
-                                                        <button class="imagebutton" type="button" data-toggle="modal" ng-attr-data-target="{{'#searchalbum'+album.album_number+eachsong.song_number}}">
+                                                        <button class="imagebutton" type="button" ng-click="updateTimesPlayed(eachsong)" data-toggle="modal" ng-attr-data-target="{{'#searchalbum'+album.album_number+eachsong.song_number}}">
                                                             <img src = "../images/music.png" width="50px" height="50px" />
                                                         </button>
                                                             <div class="modal fade" ng-attr-id="{{'searchalbum'+album.album_number+eachsong.song_number}}" tabindex="-1" role="dialog">
@@ -247,6 +404,7 @@
                                         
                                     
                                     </div>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -271,7 +429,7 @@
                                             
                                                 <div class = "col-sm-2"   >    
                                                     <div class = "thumbnail">
-                                                        <button class="imagebutton" type="button" data-toggle="modal" ng-attr-data-target="{{'#searchartist'+artist.artist_number+eachsong.song_number}}">
+                                                        <button class="imagebutton" type="button" ng-click="updateTimesPlayed(eachsong)" data-toggle="modal" ng-attr-data-target="{{'#searchartist'+artist.artist_number+eachsong.song_number}}">
                                                             <img src = "../images/music.png" width="50px" height="50px" />
                                                         </button>
                                                             <div class="modal fade" ng-attr-id="{{'searchartist'+artist.artist_number+eachsong.song_number}}" tabindex="-1" role="dialog">
@@ -332,8 +490,8 @@
                     <div class = "container col-xs-1">       
                         <h1>Songs</h1>
                     </div>
-                        <div class = "col-xs-10">
-                    </div>
+                        <div class = "col-xs-7">
+                        </div>
                         <div class = "col-xs-1">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                               Add a song
@@ -348,7 +506,7 @@
                             <h4 class="modal-title" id="myModalLabel">Add a Song</h4>
                               </div>
                               <div class="modal-body">
-                                    <form>
+                                    <form >
                                       <div class="form-group">
                                         <label for="title">Title</label>
                                         <input type="text" class="form-control" id="title" placeholder="Title" ng-model="song.addtitle" ng-init="song.addtitle=''">
@@ -366,6 +524,52 @@
                                         <input type="text" class="form-control" id="album" placeholder="Album" ng-model="song.addalbum" ng-init="song.addartist=''">
                                       </div>
                                       
+
+                                      
+                                    
+                              </div>
+                              <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" ng-click="addSong()" data-dismiss="modal">Save changes</button>
+                                    </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class = "col-xs-1">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">
+                              Recommend
+                            </button>
+                        </div>
+                        
+                        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Recommend a Song</h4>
+                              </div>
+                              <div class="modal-body">
+                                    <table class="table table-condensed">
+                                       <thead> 
+                                            <th>Song Title</th>
+                                            <th>Album Title</th>
+                                            <th>Artist Name</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="eachsong in notRecommended">
+                                                <td> {{eachsong.song_title}}</td>
+                                                <td> {{eachsong.artist_name}} </td>
+                                                <td> {{eachsong.album_title}} </td>
+                                                
+                                                <td><button class="btn btn-primary"  ng-click="addToRecommended(eachsong)">
+                                                    Recommend
+                                                </button></td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
                                     
                               </div>
                               <div class="modal-footer">
@@ -401,6 +605,8 @@
                                                         <source ng-src="{{'../music/'+eachsong.song_title+'.mp3'}}" type="audio/mpeg">
                                                         Your browser does not support the audio element.
                                                     </audio>
+                                                    
+
                                                 </div>
                                                 <div class="modal-footer">
                                                 <button type="button" class="btn btn-default audioclose" data-dismiss="modal" >Close</button>
@@ -439,46 +645,48 @@
                     </div>
                 </div>
 
-                <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
-                    <div class="panel panel-default" ng-repeat="artist in artistData">
-                        <div class="panel-heading" role="tab">
-                          <h4 class="panel-title">
-                            <a role="button" role="button" data-toggle="collapse" data-parent="#accordion2" ng-attr-href="{{'#artist'+artist.artist_number}}" aria-expanded="true" ng-attr-aria-controls="{{'#artist'+artist.artist_number}}" ng-click="getArtistSongs(artist)">
-                              {{artist.artist_name}}
-                            </a>
-                          </h4>
-                        </div>
-                        <div ng-attr-id="{{'artist'+artist.artist_number}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                          <div class="panel-body">
-                                    <!--
-                                    <table class="table table-condensed">
-                                       <thead> 
-                                            <th>Song Title</th>
-                                            <th>Album Title</th>
-                                            <th>Artist Name</th>
-                                        </thead>
-                                        <tbody>
-                                            <tr ng-repeat="eachsong in artistSongs">
-                                                <td> {{eachsong.song_title}}</td>
-                                                <td> {{eachsong.album_title}} </td>
-                                                <td> {{eachsong.artist_name}} </td>
-                                                <td> <audio controls>
-                                                        <source ng-src="{{'../music/'+eachsong.song_title+'.mp3'}}" type="audio/mpeg">
-                                                        Your browser does not support the audio element.
-                                                        </audio>  </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    -->
+                
+                    <div ng-repeat="artist in artistData">
+
+                        <div class = "col-sm-2">
+                                <a href="#artistpage" ng-click="getArtistSongs(artist)" data-toggle="tab">
+                                    <div class = "thumbnail">
+                                        <img src = "images/country.jpg" alt = "country" >
+                                        <p> <strong>{{ artist.artist_name }}</strong> </p>
+                                    </div>
+                                </a>
+                            </div>
+                        
+                    </div>
+               
+                
+            </div>
+            
+                
+                    <div id="artistpage" role="tabpanel" class="tab-pane">
+                          <div class = "container col-xs-1">
+                                        <a href="#artists" data-toggle="tab"> 
+                                            <button type = "button" class="btn btn-default" > 
+                                                <span class = "glyphicon glyphicon-chevron-left"> </span>
+                                            </button>
+                                        </a>
+                            </div>
+                            <div class = "row">
+                                <div class = "container col-xs-3">       
+                                    <h1>{{currentArtist.artist_name}}</h1>
+                                </div>
+                            </div>
+                                  
+                                   
                                     <div class = "container-fluid row text-center bg-grey">
                                         <div ng-repeat="eachsong in artistSongs">
                                             
                                                 <div class = "col-sm-2"   >    
                                                     <div class = "thumbnail">
-                                                        <button class="imagebutton" type="button" data-toggle="modal" ng-attr-data-target="{{'#songartist'+artist.artist_number+eachsong.song_number}}">
+                                                        <button class="imagebutton" type="button" ng-click="updateTimesPlayed(eachsong)" data-toggle="modal" ng-attr-data-target="{{'#songartist'+eachsong.song_number}}">
                                                             <img src = "../images/music.png" width="50px" height="50px" />
                                                         </button>
-                                                            <div class="modal fade" ng-attr-id="{{'songartist'+artist.artist_number+eachsong.song_number}}" tabindex="-1" role="dialog">
+                                                            <div class="modal fade" ng-attr-id="{{'songartist'+eachsong.song_number}}" tabindex="-1" role="dialog">
                                                               <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
@@ -518,12 +726,11 @@
 
 
 
-                          </div>
-                        </div>
+                          
+                       
                     </div>
-                </div>
-                
-            </div>
+            
+
             <div role="tabpanel" class="tab-pane" id="albums">
                 <div class = "container col-xs-1">
                             <a href="#menu-toggle" class="menu-toggle" id="menu-toggle-songs"> 
@@ -534,30 +741,52 @@
                 </div>
                 <div class = "row">
                     <div class = "container col-xs-1">       
-                        <h1>Albums</h1>
+                        <h1>Album</h1>
                     </div>
                 </div>
-                <div class="panel-group" id="accordion3" role="tablist" aria-multiselectable="true">
-                    <div class="panel panel-default" ng-repeat="album in albumData">
-                        <div class="panel-heading" role="tab">
-                          <h4 class="panel-title">
-                            <a role="button" role="button" data-toggle="collapse" data-parent="#accordion3" ng-attr-href="{{'#album'+album.album_number}}" aria-expanded="true" ng-attr-aria-controls="{{'#album'+album.album_number}}" ng-click="getAlbumSongs(album)">
-                              {{album.album_title}}
-                            </a>
-                          </h4>
-                        </div>
-                        <div ng-attr-id="{{'album'+album.album_number}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                          <div class="panel-body">
 
+                
+                    <div ng-repeat="album in albumData">
+
+                        <div class = "col-sm-2">
+                                <a href="#albumpage" ng-click="getAlbumSongs(album)" data-toggle="tab">
+                                    <div class = "thumbnail">
+                                        <img src = "images/country.jpg" alt = "country" >
+                                        <p> <strong>{{ album.album_title }}</strong> </p>
+                                    </div>
+                                </a>
+                            </div>
+                        
+                    </div>
+               
+                
+            </div>
+            
+                
+                    <div id="albumpage" role="tabpanel" class="tab-pane">
+                          <div class = "container col-xs-1">
+                                        <a href="#albums" data-toggle="tab"> 
+                                            <button type = "button" class="btn btn-default" > 
+                                                <span class = "glyphicon glyphicon-chevron-left"> </span>
+                                            </button>
+                                        </a>
+                            </div>
+                            <div class = "row">
+                                <div class = "container col-xs-3">       
+                                    <h1>{{currentAlbum.album_title}}</h1>
+                                </div>
+                            </div>
+                                  
+                                   
                                     <div class = "container-fluid row text-center bg-grey">
                                         <div ng-repeat="eachsong in albumSongs">
                                             
                                                 <div class = "col-sm-2"   >    
                                                     <div class = "thumbnail">
-                                                        <button class="imagebutton" type="button" data-toggle="modal" ng-attr-data-target="{{'#songalbum'+album.album_number+eachsong.song_number}}">
+                                                        <button class="imagebutton" type="button" ng-click="updateTimesPlayed(eachsong)" data-toggle="modal" ng-attr-data-target="{{'#songalbum'+eachsong.song_number}}">
                                                             <img src = "../images/music.png" width="50px" height="50px" />
                                                         </button>
-                                                            <div class="modal fade" ng-attr-id="{{'songalbum'+album.album_number+eachsong.song_number}}" tabindex="-1" role="dialog">
+                                                            <div class="modal fade" ng-attr-id="{{'songalbum'+eachsong.song_number}}" tabindex="-1" role="dialog">
                                                               <div class="modal-dialog">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
@@ -597,12 +826,122 @@
 
 
 
-                          </div>
-                        </div>
+                          
+                       
                     </div>
-                </div>
-                
-            </div>
+
+                    <div id="playlistpage" role="tabpanel" class="tab-pane">
+                          <div class = "container col-xs-1">
+                                        <a href="#playlists" data-toggle="tab"> 
+                                            <button type = "button" class="btn btn-default" > 
+                                                <span class = "glyphicon glyphicon-chevron-left"> </span>
+                                            </button>
+                                        </a>
+                            </div>
+                            <div class = "row">
+                                <div class = "container col-xs-3">       
+                                    <h1>{{currentPlaylist.playlist_title}}</h1>
+                                </div>
+                                <div class = "container col-xs-11">       
+                                    
+                                </div>
+                                <div class = "container col-xs-1">
+                                     <button style="float:right" type="button" class="btn btn-primary " data-toggle="modal" ng-attr-data-target="{{'#currentPlaylistadd'+currentPlaylist.playlist_number}}" ng-click="getSongsNotInPlaylist(currentPlaylist)">
+                                        Edit
+                                    </button>
+                                        <div class="modal fade" ng-attr-id="{{'currentPlaylistadd'+currentPlaylist.playlist_number}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                          <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title">Add a Song</h4>
+                                              </div>
+                                              <div class="modal-body">
+                                                <table class="table table-condensed">
+                                                   <thead> 
+                                                        <th>Song Title</th>
+                                                        <th>Album Title</th>
+                                                        <th>Artist Name</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="eachsong in songsNotInPlaylist">
+                                                            <td> {{eachsong.song_title}}</td>
+                                                            <td> {{eachsong.artist_name}} </td>
+                                                            <td> {{eachsong.album_title}} </td>
+                                                            
+                                                            <td><button class="btn btn-primary"  ng-click="addToPlaylist(eachsong, currentPlaylist)">
+                                                                Add
+                                                            </button></td>
+                                                        </tr>
+                                                        
+                                                    </tbody>
+                                                </table>
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                </div>
+                            </div>
+                                  
+                                   
+                                    <div class = "container-fluid row text-center bg-grey">
+                                        <div ng-repeat="eachsong in playlistsSongs">
+                                            
+                                                <div class = "col-sm-2"   >    
+                                                    <div class = "thumbnail">
+                                                        <button class="imagebutton" type="button" ng-click="updateTimesPlayed(eachsong)" data-toggle="modal" ng-attr-data-target="{{'#songplaylist'+currentPlaylist.playlist_number+eachsong.song_number}}">
+                                                            <img src = "../images/music.png" width="50px" height="50px" />
+                                                        </button>
+                                                            <div class="modal fade" ng-attr-id="{{'songplaylist'+currentPlaylist.playlist_number+eachsong.song_number}}" tabindex="-1" role="dialog">
+                                                              <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
+                                                                        <h4 class="modal-title">Play {{eachsong.song_title}}</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <audio class="audiofile" controls>
+                                                                            <source ng-src="{{'../music/'+eachsong.song_title+'.mp3'}}" type="audio/mpeg">
+                                                                            Your browser does not support the audio element.
+                                                                        </audio>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default audioclose" data-dismiss="modal" >Close</button>
+
+                                                                  </div>
+                                                                </div><!-- /.modal-content -->
+                                                              </div><!-- /.modal-dialog -->
+                                                            </div><!-- /.modal -->
+
+
+                                                        <p> {{eachsong.song_title}}</p>
+                                                        <p> {{eachsong.album_title}}</p>
+                                                        <p> {{eachsong.artist_name}}</p>
+                                                        <p> <button class="btn btn-danger btn-xs"  ng-click="removeFromPlaylist(eachsong, currentPlaylist)">
+                                                            Remove
+                                                        </button> </p>
+                                                    </div>
+                                                </div> 
+                                           
+                                             
+
+                                        </div>
+                                        
+                                    
+                                    </div>
+
+
+
+
+
+
+                          
+                       
+                    </div>
+
                 <div role="tabpanel" class="tab-pane" id="playlists">
                 <div class = "container col-xs-1">
                             <a href="#menu-toggle" class="menu-toggle" id="menu-toggle-songs"> 
@@ -657,106 +996,22 @@
 
 
                 
-                <div class="panel-group" id="accordion4" role="tablist" aria-multiselectable="true">
-                  <div class="panel panel-default" ng-repeat="playlist in playlists">
-                    <div class="panel-heading" role="tab" ng-attr-id="{{'heading'+playlist.playlist_number}}">
-                      <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion4" ng-attr-href="{{'#'+playlist.playlist_number}}" aria-expanded="false" ng-attr-aria-controls="{{playlist.playlist_number}}" ng-click="getPlaylistSongs(playlist)">
-                     {{playlist.playlist_title}}
-                    </a>
-                    <button style="float:right" type="button" class="btn btn-primary btn-xs" data-toggle="modal" ng-attr-data-target="{{'#playlistadd'+playlist.playlist_number}}" ng-click="getSongsNotInPlaylist(playlist)">
-                        Edit
-                    </button>
-                        <div class="modal fade" ng-attr-id="{{'playlistadd'+playlist.playlist_number}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                          <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title">Add a Song</h4>
-                              </div>
-                              <div class="modal-body">
-                                <table class="table table-condensed">
-                                   <thead> 
-                                        <th>Song Title</th>
-                                        <th>Album Title</th>
-                                        <th>Artist Name</th>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="eachsong in songsNotInPlaylist">
-                                            <td> {{eachsong.song_title}}</td>
-                                            <td> {{eachsong.artist_name}} </td>
-                                            <td> {{eachsong.album_title}} </td>
-                                            
-                                            <td><button class="btn btn-primary"  ng-click="addToPlaylist(eachsong, playlist)">
-                                                Add
-                                            </button></td>
-                                        </tr>
-                                        
-                                    </tbody>
-                                </table>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              </div>
+                    <div ng-repeat="playlist in playlists">
+
+                        <div class = "col-sm-2">
+                                <a href="#playlistpage" ng-click="getPlaylistSongs(playlist)" data-toggle="tab">
+                                    <div class = "thumbnail">
+                                        <img src = "images/country.jpg" alt = "country" >
+                                        <p> <strong>{{ playlist.playlist_title }}</strong> </p>
+                                    </div>
+                                </a>
+                                <button class="btn btn-danger btn-xs"  ng-click="">
+                                Delete
+                                </button> 
+
                             </div>
-                          </div>
-                        </div>
-                      </h4>
-                    </div>
-                    <div ng-attr-id="{{playlist.playlist_number}}" class="panel-collapse collapse" role="tabpanel" ng-attr-aria-labelledby="{'heading'+playlist.playlist_number}}">
-                      <div class="panel-body">
-                    
                         
-                                            <div ng-repeat="eachsong in playlistsSongs">
-                                            
-                                                <div class = "col-sm-2"   >    
-                                                    <div class = "thumbnail">
-                                                        <button class="imagebutton" type="button" data-toggle="modal" ng-attr-data-target="{{'#songplaylist'+playlist.playlist_number+eachsong.song_number}}">
-                                                            <img src = "../images/music.png" width="50px" height="50px" />
-                                                        </button>
-                                                            <div class="modal fade" ng-attr-id="{{'songplaylist'+playlist.playlist_number+eachsong.song_number}}" tabindex="-1" role="dialog">
-                                                              <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> 
-                                                                        <h4 class="modal-title">Play {{eachsong.song_title}}</h4>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <audio class="audiofile" controls>
-                                                                            <source ng-src="{{'../music/'+eachsong.song_title+'.mp3'}}" type="audio/mpeg">
-                                                                            Your browser does not support the audio element.
-                                                                        </audio>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-default audioclose" data-dismiss="modal" >Close</button>
-
-                                                                  </div>
-                                                                </div><!-- /.modal-content -->
-                                                              </div><!-- /.modal-dialog -->
-                                                            </div><!-- /.modal -->
-
-
-                                                        <p> {{eachsong.song_title}}</p>
-                                                        <p> {{eachsong.album_title}}</p>
-                                                        <p> {{eachsong.artist_name}}</p>
-                                                        <p> <button class="btn btn-danger btn-xs"  ng-click="removeFromPlaylist(eachsong, playlist)">
-                                                            Remove
-                                                        </button> </p>
-                                                    </div>
-                                                </div> 
-                                           
-                                             
-
-                                        </div>
-                    
-
-                    
-
-                
-                      </div>
                     </div>
-                  </div>
-                </div>
             
                 
             </div>

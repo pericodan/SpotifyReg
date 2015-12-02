@@ -23,6 +23,11 @@ angular.module("spotify", [])
     $scope.albumSongs = {};
     $scope.pendingUsers = {};
     $scope.approvedUsers = {};
+    $scope.currentArtist = {};
+    $scope.currentAlbum = {};
+    $scope.currentPlaylist = {};
+    $scope.notRecommended = {};
+
     var a;
     
     $http.get('/getPlaylist')
@@ -32,6 +37,36 @@ angular.module("spotify", [])
         .error(function(error) {
             console.log('Error: ' + error);
     });
+
+    $http.get('/notRecommended')
+    .success(function(data) {
+        $scope.notRecommended = data;
+    })
+    .error(function(error) {
+        console.log('Error: ' + error);
+    });
+
+    $scope.addToRecommended = function(song) {
+       
+            $http.get('/addRecommended/'+song.song_number)
+            .success(function(data) {
+            
+                $http.get('/notRecommended')
+                .success(function(data) {
+                    $scope.notRecommended = data;
+                })
+                .error(function(error) {
+                    console.log('Error: ' + error);
+                });
+
+            })
+            
+            .error(function(error) {
+                console.log('Error: ' + error);
+            });
+        
+    
+    }
     
     $scope.addPlaylist = function() {
         if(($scope.playlist.addtitle!="")&&($scope.playlist.addgenre!="")){
@@ -100,7 +135,7 @@ angular.module("spotify", [])
     }
 
     $scope.getPlaylistSongs = function(playlist) {
-    
+        $scope.currentPlaylist = playlist;
     		$http.get('/playlistSongs/'+playlist.playlist_number)
         	.success(function(data) {
            	 
@@ -171,7 +206,7 @@ angular.module("spotify", [])
     }
 
     $scope.getArtistSongs = function(artist) {
-    
+            $scope.currentArtist = artist;
             $http.get('/artistSongs/'+artist.artist_number)
             .success(function(data) {
              
@@ -184,11 +219,12 @@ angular.module("spotify", [])
     
     }
     $scope.getAlbumSongs = function(album) {
-    
+            $scope.currentAlbum = album;
             $http.get('/albumSongs/'+album.album_number)
             .success(function(data) {
              
                  $scope.albumSongs = data;
+                 
             })
             
             .error(function(error) {
@@ -320,10 +356,10 @@ angular.module("spotify", [])
         });
 
     }
-    $scope.addSong = function() {
+    $scope.addSong = function(musicfile) {
     
-    if(($scope.song.addtitle!="")&&($scope.song.addartist!="")&&($scope.song.addgenre!="")&&($scope.song.addalbum!="")){
-    
+        if(($scope.song.addtitle!="")&&($scope.song.addartist!="")&&($scope.song.addgenre!="")&&($scope.song.addalbum!="")){
+    /*
     	$http.post('/songs/'+$scope.song.addtitle+'/'+$scope.song.addartist+'/'+$scope.song.addgenre+'/'+$scope.song.addalbum)
         .success(function(data) {
             
@@ -343,6 +379,9 @@ angular.module("spotify", [])
         .error(function(error) {
             console.log('Error: ' + error);
         });
+    */
+        console.log(musicfile)
+
       }
       else {
       console.log('error in adding');

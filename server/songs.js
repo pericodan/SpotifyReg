@@ -306,6 +306,7 @@ exports.checkUsername = function (req, res, next) {
         // SQL Query > Select Data
        var query = client.query("select * from user_profile where username='"+req.params.username+"';");
        
+
        //var query = client.query("select * from user_profile, non_admin where non_admin.username='perico' and user_profile.user_password='dan' and non_admin.username=user_profile.username;");
 
         // Stream results back one row at a time
@@ -890,6 +891,68 @@ exports.addSongsToPlaylist = function (req, res, next) {
         query.on('row', function(row) {
             results.push(row);
             console.log("hiiii"+temp.length);
+        });
+     
+        
+    query.on('end', function() {
+        done();
+        return res.json(results);
+    });
+    
+
+    });
+};
+
+exports.recommendSong = function (req, res, next) {
+    var results = [];
+    
+
+    // Get a Postgres client from the connection pool
+    pg.connect(connectionString, function(err, client, done) {
+        // Handle connection errors
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+
+        
+    var query = client.query("insert into recommendations values("+req.params.songnumber+",'"+req.params.username+"');");
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            results.push(row);
+            
+        });
+     
+        
+    query.on('end', function() {
+        done();
+        return res.json(results);
+    });
+    
+
+    });
+};
+
+exports.getNotRecommended = function (req, res, next) {
+    var results = [];
+    
+
+    // Get a Postgres client from the connection pool
+    pg.connect(connectionString, function(err, client, done) {
+        // Handle connection errors
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+
+        
+    var query = client.query("select * from song, artist, album, includes where artist.artist_number=includes.artist_number and album.album_number=includes.album_number and song.song_number=includes.song_number and song.song_number not in (SELECT song_number FROM recommendations where username='"+req.params.username+"');");
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            results.push(row);
+            
         });
      
         

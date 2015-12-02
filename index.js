@@ -10,6 +10,8 @@ var connect = require('connect');
 var songs = require('./server/songs');
 var app = express();
 var session = require('express-session');
+var multer = require('multer');
+var upload = multer({ dest: './music/'});
 
 //var username;
 //var password;
@@ -117,6 +119,22 @@ app.get('/getPlaylist', function(req,res){
 	
 });
 
+app.get('/notRecommended', function(req,res){
+	
+	if(sess.username){
+		res.redirect('/notRecommended/'+sess.username)	
+	}
+	
+});
+
+app.get('/addRecommended/:songnumber', function(req,res){
+	
+	if(sess.username){
+		res.redirect('/recommend/'+sess.username+'/'+req.params.songnumber)	
+	}
+	
+});
+
 app.post('/addPlaylist/:title/:genre', function(req,res){
 	
 	if(sess.username){
@@ -135,7 +153,19 @@ app.put('/approveuser/:username', function(req,res){
 
 
 app.use('/', express.static(__dirname));
-//app.use('/home', express.static(__dirname + '/public'));
+
+
+app.post('/upload',function(req,res){
+	upload(req,res,function( err) {
+		if(err) {
+			return res.end("Error uploading file.");
+		}
+		//console.log(req.file);
+		console.log(req.files.userPhoto.originalname);
+		res.send("hello");
+	});
+});
+
 
 //app.get('/products', products.findAll);
 //app.get('/home/:id', songs.findById);
@@ -164,6 +194,8 @@ app.get('/notinplaylistSongs/:number', songs.getNotInPlaylistSongs);
 app.delete('/playlistSongs/:songnumber/:playlistnumber', songs.deletePlaylistSongs);
 app.post('/addplaylistSongs/:songnumber/:artistnumber/:albumnumber/:playlistnumber', songs.addSongsToPlaylist);
 
+app.get('/notRecommended/:username', songs.getNotRecommended)
+app.get('/recommend/:username/:songnumber', songs.recommendSong)
 
 app.get('/pendingusers', songs.findPendingUsers);
 app.put('/approveduser/:adminusername/:username', songs.approvePendingUsers);

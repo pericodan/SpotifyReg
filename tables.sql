@@ -46,7 +46,17 @@ CREATE TABLE artist(
 
 CREATE TABLE song(
 	song_number	serial PRIMARY KEY,
-	song_title	varchar(20) NOT NULL
+	song_title	varchar(20) NOT NULL,
+	times_played int default 0,
+	
+
+);
+
+CREATE TABLE recommendations(
+	song_number	integer REFERENCES song(song_number) ON UPDATE CASCADE ON DELETE CASCADE,
+	username	varchar(20) NOT NULL REFERENCES user_profile(username) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT recommendation PRIMARY KEY (song_number, username)
+
 );
 
 CREATE TABLE song_genre(
