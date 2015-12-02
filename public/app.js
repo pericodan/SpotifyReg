@@ -46,6 +46,28 @@ angular.module("spotify", [])
         console.log('Error: ' + error);
     });
 
+    $scope.deletePlaylist = function(playlist) {
+       
+            $http.delete('/playlist/'+playlist.playlist_number)
+            .success(function(data) {
+            
+                $http.get('/getPlaylist')
+                    .success(function(data) {
+                        $scope.playlists = data;
+                    })
+                    .error(function(error) {
+                        console.log('Error: ' + error);
+                });
+
+            })
+            
+            .error(function(error) {
+                console.log('Error: ' + error);
+            });
+        
+    
+    }
+
     $scope.addToRecommended = function(song) {
        
             $http.get('/addRecommended/'+song.song_number)

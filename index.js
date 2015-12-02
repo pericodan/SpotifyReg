@@ -169,6 +169,8 @@ app.post('/upload',function(req,res){
 
 //app.get('/products', products.findAll);
 //app.get('/home/:id', songs.findById);
+app.get('/mostrecommended', songs.mostRecommended);
+app.get('/mostplayed', songs.mostPlayed);
 app.get('/songs', songs.findAllSongs);
 app.get('/artists', songs.findAllArtists);
 app.get('/albums', songs.findAllAlbums);
@@ -192,6 +194,7 @@ app.get('/playlist/:username', songs.getPlaylist);
 app.get('/playlistSongs/:number', songs.getPlaylistSongs);
 app.get('/notinplaylistSongs/:number', songs.getNotInPlaylistSongs);
 app.delete('/playlistSongs/:songnumber/:playlistnumber', songs.deletePlaylistSongs);
+app.delete('/playlist/:playlistnumber', songs.deletePlaylist);
 app.post('/addplaylistSongs/:songnumber/:artistnumber/:albumnumber/:playlistnumber', songs.addSongsToPlaylist);
 
 app.get('/notRecommended/:username', songs.getNotRecommended)

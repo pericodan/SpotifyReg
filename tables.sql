@@ -19,12 +19,7 @@ CREATE TABLE non_admin(
 	admin_id	integer REFERENCES admin(admin_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE pending_user(
-	username	varchar(20) PRIMARY KEY,
-	user_password	varchar(20) NOT NULL,
-	name		varchar(30) NOT NULL,
-	email		varchar
-);
+
 
 CREATE TABLE playlist(
 	playlist_number	serial PRIMARY KEY,
@@ -94,29 +89,9 @@ CREATE TABLE belongs_in1(
 	CONSTRAINT belongs_in1_pk PRIMARY KEY (artist_number, song_number, playlist_number)
 );
 
-CREATE TABLE belongs_in2(
-	album_number	integer REFERENCES album(album_number) ON UPDATE CASCADE ON DELETE CASCADE,
-	playlist_number	integer REFERENCES playlist(playlist_number) ON UPDATE CASCADE ON DELETE CASCADE,
-	
-	CONSTRAINT belongs_in2_pk PRIMARY KEY (album_number, playlist_number)
-);
-	
-CREATE TABLE can_be_accessed_by1(
-	artist_number	integer REFERENCES artist(artist_number) ON UPDATE CASCADE ON DELETE CASCADE,
-	song_number	integer REFERENCES song(song_number) ON UPDATE CASCADE ON DELETE CASCADE,
-	username	varchar(20) REFERENCES user_profile(username) ON UPDATE CASCADE ON DELETE CASCADE,
-	profile_number	integer REFERENCES user_profile(profile_number) ON UPDATE CASCADE ON DELETE CASCADE,
-	
-	CONSTRAINT can_be_accessed_by1_pk PRIMARY KEY (artist_number, song_number, username, profile_number)
-);
 
-CREATE TABLE can_be_accessed_by2(
-	album_number	integer REFERENCES album(album_number) ON UPDATE CASCADE ON DELETE CASCADE,
-	username	varchar(20) REFERENCES user_profile(username) ON UPDATE CASCADE ON DELETE CASCADE,
-	profile_number	integer REFERENCES user_profile(profile_number) ON UPDATE CASCADE ON DELETE CASCADE,
 	
-	CONSTRAINT can_be_accessed_by2_pk PRIMARY KEY (album_number, username, profile_number)
-);
+
 
 
 

@@ -40,6 +40,68 @@ exports.findAllSongs = function (req, res, next) {
     });
 };
 
+exports.mostRecommended = function (req, res, next) {
+    var results = [];
+
+    // Get a Postgres client from the connection pool
+    pg.connect(connectionString, function(err, client, done) {
+        // Handle connection errors
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+
+        // SQL Query > Select Data
+        var query = client.query("select * from song, artist, album, includes where artist.artist_number=includes.artist_number and album.album_number=includes.album_number and song.song_number=includes.song_number and song.song_number in (select song_number from recommendations group by song_number order by count(username) desc) limit 10;");
+
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            results.push(row);
+        });
+        
+        
+
+        // After all data is returned, close connection and return results
+        query.on('end', function() {
+            done();
+            return res.json(results);
+        });
+
+    });
+};
+
+exports.mostPlayed = function (req, res, next) {
+    var results = [];
+
+    // Get a Postgres client from the connection pool
+    pg.connect(connectionString, function(err, client, done) {
+        // Handle connection errors
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+
+        // SQL Query > Select Data
+        var query = client.query("select * from song, artist, album, includes where artist.artist_number=includes.artist_number and album.album_number=includes.album_number and song.song_number=includes.song_number order by times_played desc limit 10;");
+
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            results.push(row);
+        });
+        
+        
+
+        // After all data is returned, close connection and return results
+        query.on('end', function() {
+            done();
+            return res.json(results);
+        });
+
+    });
+};
+
 exports.searchSong = function (req, res, next) {
     var results = [];
 
@@ -872,6 +934,36 @@ exports.deletePlaylistSongs = function (req, res, next) {
     });
 };
 
+exports.deletePlaylist = function (req, res, next) {
+    var results = [];
+
+    // Get a Postgres client from the connection pool
+    pg.connect(connectionString, function(err, client, done) {
+        // Handle connection errors
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+
+        
+    var query = client.query("delete from playlist where playlist_number="+req.params.playlistnumber+";");
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            results.push(row);
+            
+        });
+     
+        
+    query.on('end', function() {
+        done();
+        return res.json(results);
+    });
+    
+
+    });
+};
+
 exports.addSongsToPlaylist = function (req, res, next) {
     var results = [];
     var temp = []
@@ -964,41 +1056,4 @@ exports.getNotRecommended = function (req, res, next) {
 
     });
 };
-/*
-exports.create = function (req, res, next) {
-    var results = [];
-    console.log(req.body);
-    var data = {text: req.body.text, id: req.body.id};
-    //var data = {text: 'hihi', id: '9'};
-    
-    // Get a Postgres client from the connection pool
-        pg.connect(connectionString, function(err, client, done) {
-        // Handle connection errors
-        if(err) {
-          done();
-          console.log(err);
-          return res.status(500).json({ success: false, data: err});
-        }
 
-        // SQL Query > Select Data
-        var query = client.query("INSERT INTO test(test,id) VALUES($1, $2);", [data.text, data.id]);
-    
-
-        // After all data is returned, close connection and return results
-        var query = client.query("SELECT * FROM test ORDER BY id ASC;");
-
-        // Stream results back one row at a time
-        query.on('row', function(row) {
-            results.push(row);
-        });
-
-        // After all data is returned, close connection and return results
-        query.on('end', function() {
-            done();
-            return res.json(results);
-        });
-
-    });
-};*/
-
-//exports.findAll = findAll;
