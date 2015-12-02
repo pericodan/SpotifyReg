@@ -119,6 +119,13 @@ angular.module("spotify", [])
         
     
     }
+    $http.get('/notRecommended')
+                .success(function(data) {
+                    $scope.notRecommended = data;
+                })
+                .error(function(error) {
+                    console.log('Error: ' + error);
+                });
 
     $scope.addToRecommended = function(song) {
        
@@ -149,6 +156,7 @@ angular.module("spotify", [])
             
                 $http.get('/getPlaylist')
                 .success(function(data) {
+                    console.log("hello");
                     $scope.playlists = data;
                 })
                 .error(function(error) {
