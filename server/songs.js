@@ -133,6 +133,37 @@ exports.getGenres = function (req, res, next) {
     });
 };
 
+exports.getGenresSong = function (req, res, next) {
+    var results = [];
+
+    // Get a Postgres client from the connection pool
+    pg.connect(connectionString, function(err, client, done) {
+        // Handle connection errors
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+
+        // SQL Query > Select Data
+        var query = client.query("select * from song, artist, album, includes, song_genre where artist.artist_number=includes.artist_number and album.album_number=includes.album_number and song.song_number=includes.song_number and song.song_number=song_genre.song_number and lower(song_genre.genre)=lower('"+req.params.genre+"');");
+
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            results.push(row);
+        });
+        
+        
+
+        // After all data is returned, close connection and return results
+        query.on('end', function() {
+            done();
+            return res.json(results);
+        });
+
+    });
+};
+
 exports.mostRecommendedAlbum = function (req, res, next) {
     var results = [];
 
@@ -802,6 +833,8 @@ exports.addSong = function (req, res, next) {
         }
 
         // SQL Query > Select Data
+
+        
         var query = client.query("insert into song(song_title) values('"+req.params.title+"');");
         query.on('end', function() {
             done();

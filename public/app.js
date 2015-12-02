@@ -32,6 +32,8 @@ angular.module("spotify", [])
     $scope.topAlbum = {};
     $scope.topArtist = {};
     $scope.genres = {};
+    $scope.genreSong = {};
+    $scope.currentGenre = {};
 
 
     var a;
@@ -92,6 +94,22 @@ angular.module("spotify", [])
                     .error(function(error) {
                         console.log('Error: ' + error);
                 });
+
+            })
+            
+            .error(function(error) {
+                console.log('Error: ' + error);
+            });
+        
+    
+    }
+
+    $scope.getSongGenre = function(genre) {
+       $scope.currentGenre = genre;
+            $http.get('/genres/'+genre.genre)
+            .success(function(data) {
+                console.log(data);
+                $scope.genreSong = data;
 
             })
             
