@@ -834,7 +834,7 @@ exports.addSong = function (req, res, next) {
 
         // SQL Query > Select Data
 
-        
+
         var query = client.query("insert into song(song_title) values('"+req.params.title+"');");
         query.on('end', function() {
             done();
@@ -1013,6 +1013,37 @@ exports.getNotInPlaylistSongs = function (req, res, next) {
 
         
     var query = client.query("select * from song, artist, album, includes where artist.artist_number=includes.artist_number and album.album_number=includes.album_number and song.song_number=includes.song_number and song.song_number not in (SELECT song_number FROM belongs_in1 where playlist_number='"+req.params.number+"');");
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            results.push(row);
+            
+        });
+     
+        
+    query.on('end', function() {
+        done();
+        return res.json(results);
+    });
+    
+
+    });
+};
+
+exports.findSongTitle = function (req, res, next) {
+    var results = [];
+    var temp = []
+
+    // Get a Postgres client from the connection pool
+    pg.connect(connectionString, function(err, client, done) {
+        // Handle connection errors
+        if(err) {
+          done();
+          console.log(err);
+          return res.status(500).json({ success: false, data: err});
+        }
+
+        
+    var query = client.query("select * from song where lower(song_title) like lower('"+req.params.title+"');");
         // Stream results back one row at a time
         query.on('row', function(row) {
             results.push(row);

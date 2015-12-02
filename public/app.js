@@ -433,28 +433,43 @@ angular.module("spotify", [])
     $scope.addSong = function(musicfile) {
     
         if(($scope.song.addtitle!="")&&($scope.song.addartist!="")&&($scope.song.addgenre!="")&&($scope.song.addalbum!="")){
-    
-    	$http.post('/songs/'+$scope.song.addtitle+'/'+$scope.song.addartist+'/'+$scope.song.addgenre+'/'+$scope.song.addalbum)
-        .success(function(data) {
-            
-            $http.post('/includes/'+$scope.song.addtitle+'/'+$scope.song.addartist+'/'+$scope.song.addalbum)
+            $http.get('/songs2/'+$scope.song.addtitle)
             .success(function(data) {
-                $scope.songsData = data;
-                $scope.song.addtitle = "";
-                $scope.song.addartist = "";
-                $scope.song.addgenre = "";
-                $scope.song.addalbum = "";
+                console.log(data.length);
+                if(data.length!=0){
+
+                    alert('Song already exists')
+                }
+                else{
+                    $http.post('/songs/'+$scope.song.addtitle+'/'+$scope.song.addartist+'/'+$scope.song.addgenre+'/'+$scope.song.addalbum)
+                .success(function(data) {
+                    
+                    $http.post('/includes/'+$scope.song.addtitle+'/'+$scope.song.addartist+'/'+$scope.song.addalbum)
+                    .success(function(data) {
+                        $scope.songsData = data;
+                        $scope.song.addtitle = "";
+                        $scope.song.addartist = "";
+                        $scope.song.addgenre = "";
+                        $scope.song.addalbum = "";
+                    })
+                    .error(function(error) {
+                        console.log('Error: ' + error);
+                    });
+                   
+                })
+                .error(function(error) {
+                    console.log('Error: ' + error);
+                });
+
+                }
+               
             })
             .error(function(error) {
                 console.log('Error: ' + error);
             });
-           
-        })
-        .error(function(error) {
-            console.log('Error: ' + error);
-        });
-    
-        console.log(musicfile)
+            	
+            
+                //console.log(musicfile)
 
       }
       else {

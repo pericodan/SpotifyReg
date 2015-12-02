@@ -1,3 +1,8 @@
+@font-face {
+	font-family: Lane; 
+	src: url('/../fonts/Lane-Narrow.ttf'); 
+} 
+
 body#home-body {
 	color: #fff;
 	text-align: center;
@@ -162,4 +167,16 @@ div.panel-body{
 
 	color:white;
 	text-align: left;
+}
+div#profile, div#search{
+	font-family: Lane, sans-serif;
+	color: white;
+}
+
+div#profile-tabs{
+	font-family: sans-serif;
+}
+
+button#search-btn{
+	color: black;
 }

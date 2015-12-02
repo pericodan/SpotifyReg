@@ -176,6 +176,7 @@ app.get('/mostrecommendedalbum', songs.mostRecommendedAlbum);
 app.get('/mostrecommended', songs.mostRecommended);
 app.get('/mostplayed', songs.mostPlayed);
 app.get('/songs', songs.findAllSongs);
+app.get('/songs2/:title', songs.findSongTitle);
 app.get('/artists', songs.findAllArtists);
 app.get('/albums', songs.findAllAlbums);
 app.get('/album/:title', songs.findAlbum);
