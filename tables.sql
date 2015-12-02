@@ -89,25 +89,3 @@ CREATE TABLE belongs_in1(
 	CONSTRAINT belongs_in1_pk PRIMARY KEY (artist_number, song_number, playlist_number)
 );
 
-
-	
-
-
-
-
-insert into song(song_title) values('Bad Blood');
-insert into song_genre(song_number, genre) values ((select song_number from song where song_title='Bad Blood'), 'Pop');
-insert into album(album_title) values('1989');
-insert into artist(artist_name) values('Taylor Swift');
-insert into includes(song_number, artist_number, album_number) values((select song_number from song where song_title='Bad Blood'), (select artist_number from artist where artist_name='Taylor Swift'), (select album_number from album where album_title='1989')); 
-
-insert into user_profile(username, user_password, name, email) values('admin', 'admin1234', 'Admin 1', 'example@gmail.com');
-insert into admin(username) values('admin');
-
-insert into user_profile(username, user_password, name, email) values('perico', 'dan', 'Perico Dan Dionisio', 'perico.dionisio@gmail.com');
-insert into non_admin(username) values('perico');	
-
-select * from user_profile, non_admin where non_admin.username='perico' and user_profile.user_password='dan' and non_admin.username=user_profile.username;
-
-
-select * from song, artist, album, includes where artist.artist_number=includes.artist_number and album.album_number=includes.album_number and song.song_number=includes.song_number;
