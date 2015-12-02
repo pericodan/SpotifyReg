@@ -169,6 +169,7 @@ app.post('/upload',function(req,res){
 
 //app.get('/products', products.findAll);
 //app.get('/home/:id', songs.findById);
+ap.get('/genres', songs.getGenres);
 app.get('/mostrecommendedartist', songs.mostRecommendedArtist);
 app.get('/mostrecommendedalbum', songs.mostRecommendedAlbum);
 app.get('/mostrecommended', songs.mostRecommended);

@@ -339,105 +339,16 @@
                         </div>
                     </div>
                     <div class = "container-fluid row text-center bg-grey" id = "main-genre">
-                        <div class = "row" id = "main-genre-row1">
+                        <div class = "row" ng-repeat="genre in genres">
                             <div class = "col-sm-2" id = "genre-opm">
                                 <a href = "#" data-toggle="tab">
                                     <div class = "thumbnail">
-                                        <img src = "images/opm.jpg" alt = "OPM">
-                                        <p> <strong> OPM </strong> </p>
+                                        <img ng-attr-src = "{{'images/'+genre.genre+'.jpg'}}">
+                                        <p> <strong> {{genre.genre}} </strong> </p>
                                     </div>
                                 </a>
                             </div>
-                            <div class = "col-sm-2" id = "genre-rnb">
-                                <a href = "#" data-toggle="tab">
-                                    <div class = "thumbnail">
-                                        <img src = "images/rnb.jpg" alt = "rnb">
-                                        <p> <strong> RnB </strong> </p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class = "col-sm-2" id = "genre-edm-dance">
-                                <a href = "#" data-toggle="tab">
-                                    <div class = "thumbnail">
-                                        <img src = "images/edm-dance.jpg" alt = "edm-dance" >
-                                        <p> <strong> EDM/Dance </strong> </p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class = "col-sm-2" id = "genre-hiphop">
-                                <a href = "#" data-toggle="tab">
-                                    <div class = "thumbnail">
-                                        <img src = "images/hiphop.jpg" alt = "hiphop" >
-                                        <p> <strong> Hip hop </strong> </p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class = "col-sm-2" id = "genre-country">
-                                <a href = "#" data-toggle="tab">
-                                    <div class = "thumbnail">
-                                        <img src = "images/country.jpg" alt = "country" >
-                                        <p> <strong> Country </strong> </p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class = "col-sm-2" id = "genre-metal">
-                                <a href = "#" data-toggle="tab">
-                                    <div class = "thumbnail">
-                                        <img src = "images/metal.jpg" alt = "metal" >
-                                        <p> <strong> Metal </strong> </p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class = "row" id = "main-genre-row2">
-                            <div class = "col-sm-2" id = "genre-rocknroll">
-                                <a href = "#" data-toggle="tab">
-                                    <div class = "thumbnail">
-                                        <img src = "images/rocknroll.jpg" alt = "rocknroll" >
-                                        <p> <strong> Rock n' Roll </strong> </p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class = "col-sm-2" id = "genre-indie-alt">
-                                <a href = "#" data-toggle="tab">
-                                    <div class = "thumbnail">
-                                        <img src = "images/indie-alt.jpg" alt = "indie-alt" >
-                                        <p> <strong> Indie/Alternative </strong> </p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class = "col-sm-2" id = "genre-classical">
-                                <a href = "#" data-toggle="tab">
-                                    <div class = "thumbnail">
-                                        <img src = "images/classical.jpg" alt = "classical" >
-                                        <p> <strong> Classical </strong> </p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class = "col-sm-2" id = "genre-blues">
-                                <a href = "#" data-toggle="tab">
-                                    <div class = "thumbnail">
-                                        <img src = "images/blues.jpg" alt = "blues" >
-                                        <p> <strong> Blues </strong> </p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class = "col-sm-2" id = "genre-pop">
-                                <a href = "#" data-toggle="tab">
-                                    <div class = "thumbnail">
-                                        <img src = "images/pop.jpg" alt = "pop" >
-                                        <p> <strong> Pop </strong> </p>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class = "col-sm-2" id = "genre-jazz">
-                                <a href = "#" data-toggle="tab">
-                                    <div class = "thumbnail">
-                                        <img src = "images/jazz.jpg" alt = "jazz" >
-                                        <p> <strong> Jazz </strong> </p>
-                                    </div>
-                                </a>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
