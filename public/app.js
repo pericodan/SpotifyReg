@@ -30,6 +30,7 @@ angular.module("spotify", [])
     $scope.mostRecommended = {};
     $scope.mostPlayed = {};
     $scope.topAlbum = {};
+    $scope.topArtist = {};
 
     var a;
     
@@ -46,6 +47,13 @@ angular.module("spotify", [])
         })
         .error(function(error) {
             console.log('Error: ' + error);
+    });
+    $http.get('/mostrecommendedartist')
+    .success(function(data) {
+        $scope.topArtist = data;
+    })
+    .error(function(error) {
+        console.log('Error: ' + error);
     });
     $http.get('/mostplayed')
         .success(function(data) {
@@ -398,7 +406,7 @@ angular.module("spotify", [])
     $scope.addSong = function(musicfile) {
     
         if(($scope.song.addtitle!="")&&($scope.song.addartist!="")&&($scope.song.addgenre!="")&&($scope.song.addalbum!="")){
-    /*
+    
     	$http.post('/songs/'+$scope.song.addtitle+'/'+$scope.song.addartist+'/'+$scope.song.addgenre+'/'+$scope.song.addalbum)
         .success(function(data) {
             
@@ -418,7 +426,7 @@ angular.module("spotify", [])
         .error(function(error) {
             console.log('Error: ' + error);
         });
-    */
+    
         console.log(musicfile)
 
       }
