@@ -168,7 +168,7 @@ div.panel-body{
 	color:white;
 	text-align: left;
 }
-div#profile, div#search{
+div#main, div#profile, div#search, div#songs, div#artists, div#albums, div#playlists, div.tab-content, h1{
 	font-family: Lane, sans-serif;
 	color: white;
 }
@@ -180,3 +180,23 @@ div#profile-tabs{
 button#search-btn{
 	color: black;
 }
+
+p{
+	font-weight: bold;
+}
+
+button.btn{
+	font-weight: bold;
+}
+
+ul.nav-tabs{
+	font-family: Lane, sans-serif;
+	font-weight: bold;
+}
+
+/*Modals*/
+
+div.modal{
+	color: black;
+}
+
